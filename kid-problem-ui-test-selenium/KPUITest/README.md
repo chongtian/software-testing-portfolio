@@ -1,4 +1,4 @@
-## UI Automation Suite | Kid Problems
+## Selenium Test Project | Kid Problems
 A Selenium WebDriver framework built with C# and NUnit to validate the Kid Problems web application (refer to the repo here: [kid-problems](https://github.com/chongtian/kid-problems)). This project demonstrates SDET best practices including the Page Object Model (POM), clean code, and secure configuration management.
 
 ### Tech Stack
