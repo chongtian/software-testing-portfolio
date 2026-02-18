@@ -1,10 +1,10 @@
-## Selenium Test Project | Kid Problems
-A Selenium WebDriver framework built with C# and NUnit to validate the Kid Problems web application (refer to the repo here: [kid-problems](https://github.com/chongtian/kid-problems)). This project demonstrates SDET best practices including the Page Object Model (POM), clean code, and secure configuration management.
+## Selenium Test Suites | Kid Problems
+This test suite showcases Selenium WebDriver frameworks built with C# and NUnit/xUnit to validate the Kid Problems web application (refer to the repo here: [kid-problems](https://github.com/chongtian/kid-problems)). This test suite demonstrates SDET best practices including the Page Object Model (POM), clean code, and secure configuration management.
 
 ### Tech Stack
 - Language: C# (.NET 8.0)
 - Automation: Selenium WebDriver
-- Test Runner: NUnit
+- Test Runner: xUnit, NUnit
 - Pattern: Page Object Model (POM)
 
 ### Key Features
