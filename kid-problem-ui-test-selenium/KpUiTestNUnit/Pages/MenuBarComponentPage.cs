@@ -51,7 +51,7 @@ public sealed class MenuBarComponentPage : PageBase
     /// <returns></returns>
     private T? ClickSubmenu<T>(int lv1MenuIndex, int lv2MenuIndex = 2) where T : PageBase
     {
-        var lv1MenuItem = _wait.Until(d => d.FindElement(By.CssSelector($"app-kp-menu > span:nth-child({lv1MenuIndex + 1}) > button")));
+        var lv1MenuItem = _wait.Until(d => d.FindElement(By.CssSelector($"kp-menu span:nth-child({lv1MenuIndex + 3}) > button")));
         if (lv1MenuItem != null && lv1MenuItem.Enabled && lv1MenuItem.Displayed)
         {
             lv1MenuItem.Click();

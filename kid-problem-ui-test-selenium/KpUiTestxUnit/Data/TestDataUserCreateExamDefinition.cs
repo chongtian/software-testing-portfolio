@@ -29,24 +29,24 @@ public static class TestDataUserCreateExamDefinition
 
     public static readonly ExamDefinition Test2 = new()
     {
-        ExamCategoryText = "AMC12",
-        ExamCategoryIndex = 3,
-        ExamTitle = $"AMC12 TestExam {DateTime.Now.Ticks}",
+        ExamCategoryText = "AMC10",
+        ExamCategoryIndex = 2,
+        ExamTitle = $"AMC10 TestExam {DateTime.Now.Ticks}",
         ActiveStatusValue = true,
         ActiveStatusText = "Yes",
-        ExamYear = "2022",
+        ExamYear = "2020B",
         ExamTypeText = "Practice",
         ExamTypeIndex = 2,
         Memo = "UI Test",
         ProblemTitles =
         [
-            "AMC12-2022A-001",
-            "AMC12-2022A-002",
-            "AMC12-2022A-003",
-            "AMC12-2022A-004",
-            "AMC12-2022A-005"
+            "AMC10-2020B-001",
+            "AMC10-2020B-002",
+            "AMC10-2020B-003",
+            "AMC10-2020B-004",
+            "AMC10-2020B-005"
         ],
         ProblemTitleSelectIndexes = [0, 1, 2, 3, 4],
-        CountOfExpectedProblems = 50
+        CountOfExpectedProblems = 25
     };
 }

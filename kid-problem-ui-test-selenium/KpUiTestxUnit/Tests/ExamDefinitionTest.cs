@@ -52,7 +52,7 @@ namespace KpUiTestxUnit.Tests
 
         [Theory]
         [InlineData("AMC10/TestData20260210001")]
-        [InlineData("AMC10/AMC10 2020B")]
+        [InlineData("AMC10/AMC10 P14 16B 236")]
         public void User_Navigate_To_Exam_Def_Edit_Screen(string examDefTitle)
         {
             string testExamDefTitle = TestDataHelper.EncodeUrl(examDefTitle);
@@ -70,7 +70,7 @@ namespace KpUiTestxUnit.Tests
         }
 
         [Theory]
-        [InlineData("AMC12/TestData20260213001", "AMC12", "TestData20260213001")]
+        [InlineData("AMC10/TestData20260213001", "AMC10", "TestData20260213001")]
         public void User_Create_Assignment_From_Exam_Definition(string examDefTitle, string examCategory, string examTitle)
         {
             string testExamDefTitle = TestDataHelper.EncodeUrl(examDefTitle);
@@ -86,7 +86,7 @@ namespace KpUiTestxUnit.Tests
             Assert.True(destPage.GetCompleted() == "No");
         }
 
-        [Fact(Skip = "this test will fail due to an issue in the API service.")]
+        [Fact]
         public void User_Inactivate_Exam_Def()
         {
             string testExamDefTitle = "AMC10/TestData20260210002";

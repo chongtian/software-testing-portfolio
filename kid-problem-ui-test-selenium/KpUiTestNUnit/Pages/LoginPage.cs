@@ -24,10 +24,10 @@ namespace KpUiTestNUnit.Pages
             passwordField.FindElement(_driver).SendKeys(password);
             loginButton.FindElement(_driver).Click();
 
-            var wait = WebDriverUtility.GetWait(_driver);
             try
             {
-                wait.Until(d => d.Url.Contains("/home"));
+                _wait.Until(d => d.Url.Contains("/home"));
+                _wait.Until(d => d.FindElements(By.CssSelector("mat-progress-bar")).Count == 0);
                 return true;
             }
             catch (WebDriverTimeoutException)

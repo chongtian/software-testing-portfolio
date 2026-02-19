@@ -18,10 +18,4 @@ public sealed class ExamDefinitionQueryPage : PageBase
         return loaded;
     }
 
-    private bool IsNotLoading()
-    {
-        By progressBar = By.CssSelector("mat-progress-bar");
-        return _wait.Until(d => d.FindElements(progressBar).Count == 0);
-    }
-
 }

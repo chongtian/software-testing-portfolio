@@ -36,4 +36,10 @@ export class ExamRunQueryPage {
         await link.click();
     }
 
+    async clickNextPage() {
+        const nextPageButton = this.page.getByRole("button", { name: 'Next page' });
+        await expect(nextPageButton).toBeEnabled();
+        await nextPageButton.click();
+    }
+
 }

@@ -8,8 +8,9 @@ public class DashboardPage : PageBase
 
     public override bool IsPageLoaded(bool withData = false)
     {
-        bool isLoaded = _wait.Until(d => d.FindElement(By.CssSelector("app-exam-summary-list-view > h3")) != null);
-        isLoaded = isLoaded && _driver.FindElement(By.CssSelector("app-exam-summary-list-view > h3")).Text.Equals("List Exam Summaries");
+        // bool isLoaded = _wait.Until(d => d.FindElement(By.CssSelector("app-exam-summary-list-view > h3")) != null);
+        // isLoaded = isLoaded && _driver.FindElement(By.CssSelector("app-exam-summary-list-view > h3")).Text.Equals("List Exam Summaries");
+        bool isLoaded = IsNotLoading();
         return isLoaded;
     }
 

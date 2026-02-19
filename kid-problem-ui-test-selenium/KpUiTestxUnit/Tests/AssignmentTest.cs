@@ -17,8 +17,8 @@ namespace KpUiTestxUnit.Tests
         }
 
         [Theory]
-        [InlineData("8/1/2025", "9/1/2025", 14, "August 30, 2025 at 11:28:32 AM GMT-5")]
-        [InlineData("10/1/2025", "10/31/2025", 16, "October 25, 2025 at 11:41:00 AM GMT-5")]
+        [InlineData("8/1/2023", "8/15/2023", 12, "August 14, 2023 at 9:03:58 AM GMT-5")]
+        [InlineData("10/1/2023", "10/25/2023", 14, "October 23, 2023 at 2:36:59 PM GMT-5")]
         public void User_Query_In_Assignments(string startTime, string endTime, int expectedCount, string firstRecord)
         {
             _driver.Navigate().GoToUrl(AssignmentQueryPage.PageUrl);
@@ -33,8 +33,8 @@ namespace KpUiTestxUnit.Tests
         }
 
         [Theory]
-        [InlineData("8/1/2025", "9/1/2025", 9, "64046b7b-de62-4c4f-95b3-eca4ab24a4f9", "AMC10 2022 Wrong Practice 01")]
-        [InlineData("10/1/2025", "10/31/2025", 5, "c51c260b-a445-4e65-b2c6-b6718a73c92d", "AMC10 Regular Practice 011")]
+        [InlineData("8/1/2023", "8/15/2023", 9, "e4a21255-272c-4c8c-a657-e667db863b98", "AMC10 Review 140 520")]
+        [InlineData("10/1/2023", "10/25/2023", 5, "a358a6e5-a429-4ab5-b73d-a3a4a043f114", "AMC10-2022B Part 4 575")]
         public void User_Navigate_To_Detail_From_List_Assignments(string startTime, string endTime, int selectIndex, string uid, string examTitle)
         {
             _driver.Navigate().GoToUrl(AssignmentQueryPage.PageUrl);

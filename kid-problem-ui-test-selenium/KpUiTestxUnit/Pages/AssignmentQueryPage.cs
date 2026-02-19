@@ -110,10 +110,4 @@ public sealed class AssignmentQueryPage : PageBase
         return 0;
     }
 
-    private bool IsNotLoading()
-    {
-        By progressBar = By.CssSelector("mat-progress-bar");
-        return _wait.Until(d => d.FindElements(progressBar).Count == 0);
-    }
-
 }

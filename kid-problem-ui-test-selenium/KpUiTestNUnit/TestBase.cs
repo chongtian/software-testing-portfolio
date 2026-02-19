@@ -14,7 +14,7 @@ namespace KpUiTestNUnit
         public void SetUp()
         {
             Driver = WebDriverUtility.GetDriver();
-            InjectSession(Driver);
+            InjectSession();
         }
 
         [TearDown]
@@ -24,26 +24,27 @@ namespace KpUiTestNUnit
             Driver.Dispose();
         }
 
-        public void InjectSession(IWebDriver driver)
+        private void InjectSession()
         {
             // 1. Navigate to the domain first
-            driver.Navigate().GoToUrl(Constants.BASE_URL + "/login");
+            Driver.Navigate().GoToUrl(Constants.BASE_URL);
 
             // 2. Inject Cookies
             var cookieData = File.ReadAllText(LocalCookiesFile);
             var cookies = JsonConvert.DeserializeObject<List<Cookie>>(cookieData);
             foreach (var cookie in cookies)
             {
-                driver.Manage().Cookies.AddCookie(cookie);
+                Driver.Manage().Cookies.AddCookie(cookie);
             }
 
             // 3. Inject Local Storage (via JS)
             var storageData = File.ReadAllText(LocalStorageFile);
-            IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
+            IJavaScriptExecutor js = (IJavaScriptExecutor)Driver;
             js.ExecuteScript($"var data = {storageData}; for(var key in data) {{ localStorage.setItem(key, data[key]); }}");
 
             // 4. Refresh to reflect the logged-in state
-            driver.Navigate().Refresh();
+            Driver.Navigate().GoToUrl(Constants.HOME_URL);
+            Driver.Navigate().Refresh();
         }
     }
 }

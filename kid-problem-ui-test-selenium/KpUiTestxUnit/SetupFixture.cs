@@ -48,7 +48,7 @@ namespace KpUiTestxUnit
             IWebDriver driver = WebDriverUtility.GetDriver();
 
             // 1. Navigate to the domain first
-            driver.Navigate().GoToUrl(Constants.BASE_URL + "/login");
+            driver.Navigate().GoToUrl(Constants.BASE_URL);
 
             // 2. Inject Cookies
             foreach (var cookie in AuthCookies)
@@ -61,6 +61,7 @@ namespace KpUiTestxUnit
             js.ExecuteScript($"var data = {LocalStorage}; for(var key in data) {{ localStorage.setItem(key, data[key]); }}");
 
             // 4. Refresh to reflect the logged-in state
+            driver.Navigate().GoToUrl(Constants.HOME_URL);
             driver.Navigate().Refresh();
 
             return driver;

@@ -9,7 +9,7 @@ public class WebDriverUtility
         ChromeOptions options = new ChromeOptions();
         options.AddArgument("headless");  // Run the browser in headless mode for CI environments
         IWebDriver driver = new ChromeDriver(options);
-        driver.Manage().Window.Maximize();
+        driver.Manage().Window.Size = new System.Drawing.Size(1920, 1080);
         return driver;
     }
 

@@ -27,6 +27,7 @@ namespace KpUiTestxUnit.Pages
             try
             {
                 _wait.Until(d => d.Url.Contains("/home"));
+                _wait.Until(d => d.FindElements(By.CssSelector("mat-progress-bar")).Count == 0);
                 return true;
             }
             catch (WebDriverTimeoutException)

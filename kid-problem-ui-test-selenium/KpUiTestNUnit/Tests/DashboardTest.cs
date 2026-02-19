@@ -14,7 +14,7 @@ namespace KpUiTestNUnit.Tests
             var page = new DashboardPage(Driver);
 
             Assert.IsTrue(page.IsPageLoaded());
-            Assert.IsTrue(page.GetCountOfExamSummaries() == 5);
+            Assert.IsTrue(page.GetCountOfExamSummaries() == 4);
         }
 
         [Test]

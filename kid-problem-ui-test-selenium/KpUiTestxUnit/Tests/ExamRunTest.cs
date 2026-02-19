@@ -17,8 +17,8 @@ namespace KpUiTestxUnit.Tests
         }
 
         [Theory]
-        [InlineData("8/1/2025", "9/1/2025", 13, "AMC10 2019 Wrong Practice 01")]
-        [InlineData("9/2/2025", "9/30/2025", 23, "AMC10 2019 Hard Practice 01")]
+        [InlineData("8/1/2023", "8/15/2023", 12, "AMC10 Review 147 529")]
+        [InlineData("9/2/2023", "9/30/2023", 20, "AMC10 Review 177 564")]
         public void User_Query_In_Exam_Summaries(string startTime, string endTime, int expectedCount, string firstRecord)
         {
             _driver.Navigate().GoToUrl(ExamRunQueryPage.PageUrl);
@@ -33,8 +33,8 @@ namespace KpUiTestxUnit.Tests
         }
 
         [Theory]
-        [InlineData("8/1/2025", "9/1/2025", 9, "47446d46-c603-4540-bbdb-f0290d768522", "AMC10 Practice wrong problem 01")]
-        [InlineData("9/2/2025", "9/30/2025", 5, "209b5da9-5cc4-4328-a480-47c2ac908d6b", "AMC12 2019 Easy Practice 01")]
+        [InlineData("8/1/2023", "8/15/2023", 9, "5423ac10-eec6-4555-8faa-3096d878018a", "AMC10 Review 140 520")]
+        [InlineData("9/2/2023", "9/30/2023", 5, "0ab4af3f-6b3b-4232-9aca-3fdc02a8ded7", "AMC10 Review 172 559")]
         public void User_Navigate_To_Detail_From_List_Exam_Summaries(string startTime, string endTime, int selectIndex, string uid, string examTitle)
         {
             _driver.Navigate().GoToUrl(ExamRunQueryPage.PageUrl);
@@ -81,8 +81,8 @@ namespace KpUiTestxUnit.Tests
         }
 
         [Theory]
-        [InlineData("3bda2c3e-bf51-4005-9483-97c4d971c17e", "ecd3961a-8583-40eb-b643-eab05d1ae1f5", "August 30, 2025 at 11:27:36 AM GMT-5")]
-        [InlineData("ed19f011-8dab-4d80-8c7e-a838f88468da", "70125fdf-d7bc-4952-aa97-81df3fe066c0", "February 8, 2025 at 11:50:57 AM GMT-6")]
+        [InlineData("8f3731de-2e41-42c1-8b47-fbc9e6d9925d", "ac0d1f40-87cc-4ba9-a202-5420dace507f", "August 8, 2023 at 9:11:38 AM GMT-5")]
+        [InlineData("5b717440-6871-40bb-a2a9-80b471d0de29", "0b583da7-8886-45c3-bba5-b78aee36580b", "August 7, 2023 at 9:56:26 AM GMT-5")]
         public void User_Click_Assignment_Link_From_Exam_Run(string examRunUid, string assignmentUid, string assignmentCreateTime)
         {
             _driver.Navigate().GoToUrl($"{ExamRunViewPage.PageUrl}/{examRunUid}");
