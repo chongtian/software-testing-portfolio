@@ -24,7 +24,7 @@ namespace KpUiTestNUnit.Tests
             var page = new ExamDefEditPage(Driver);
             Assert.IsTrue(page.IsPageLoaded());
 
-            page.SelectExamcCategory(testData.ExamCategoryIndex);
+            page.SelectExamCategory(testData.ExamCategoryIndex);
             page.EnterExamTitle(testData.ExamTitle);
             page.EnterExamYear(testData.ExamYear!);
             page.EnterMemo(testData.Memo!);

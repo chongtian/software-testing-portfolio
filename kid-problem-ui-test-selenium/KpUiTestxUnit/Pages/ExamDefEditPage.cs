@@ -57,7 +57,7 @@ public sealed class ExamDefEditPage : PageBase
     }
 
     // itemIndex is 1-based
-    public void SelectExamcCategory(int itemIndex)
+    public void SelectExamCategory(int itemIndex)
     {
         string selectOptions = $".cdk-overlay-pane mat-option:nth-child({itemIndex})";
 
