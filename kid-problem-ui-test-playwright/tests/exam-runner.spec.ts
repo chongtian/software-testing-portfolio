@@ -1,12 +1,12 @@
 import { test, expect } from '@playwright/test';
-import { childAuthDataFilePath } from '../utils/constants';
+import { ChildAuthDataFilePath } from '../utils/constants';
 import { ExamRunnerPage } from '../pages/ExamRunnerPage';
 import { AssignmentQueryPage } from '../pages/AssignmentQueryPage';
 import { ExamRunViewPage } from '../pages/ExamRunViewPage';
 
 test.describe('Exam Runner (before clicking Complete button)', () => {
 
-    test.use({ storageState: childAuthDataFilePath });
+    test.use({ storageState: ChildAuthDataFilePath });
 
     // this test suite tests read-only UI behavior of Exam Runner
     // Do not click "I Complete Exam"
@@ -96,7 +96,7 @@ test.describe('Exam Runner (before clicking Complete button)', () => {
 
 test.describe('Child user does Assignment', () => {
 
-    test.use({ storageState: childAuthDataFilePath });
+    test.use({ storageState: ChildAuthDataFilePath });
 
     test('Child user can Do Assignment', async ({ page }) => {
         const assignmentQueryPage = new AssignmentQueryPage(page);

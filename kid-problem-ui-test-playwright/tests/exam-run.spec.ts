@@ -1,12 +1,12 @@
 import { test, expect } from '@playwright/test';
-import { adminAuthDataFilePath } from '../utils/constants'
+import { AdminAuthDataFilePath } from '../utils/constants'
 import { ExamRunQueryPage } from '../pages/ExamRunQueryPage';
 import { describe } from 'node:test';
 import { ExamRunViewPage } from '../pages/ExamRunViewPage';
 
 test.describe('Exam Run Query', () => {
 
-    test.use({ storageState: adminAuthDataFilePath });
+    test.use({ storageState: AdminAuthDataFilePath });
 
     test('User queries in Exam Run Query', async ({ page }) => {
         const examRunQueryPage = new ExamRunQueryPage(page);
@@ -41,7 +41,7 @@ test.describe('Exam Run Query', () => {
 });
 
 describe('Exam Run View', () => {
-    test.use({ storageState: adminAuthDataFilePath });
+    test.use({ storageState: AdminAuthDataFilePath });
 
     test('User open Exam Run View', async ({ page }) => {
         const uid = "688fb869-5d8e-49d5-b092-13caf69c8fc7";

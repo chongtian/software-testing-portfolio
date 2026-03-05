@@ -1,10 +1,10 @@
 import { test, expect } from '@playwright/test';
-import { HOME_URL, adminAuthDataFilePath } from '../utils/constants'
+import { HOME_URL, AdminAuthDataFilePath } from '../utils/constants'
 import { MenuBarComponentPage } from '../pages/MenuBarComponentPage';
 
 test.describe('Admin user or Parent user uses Dashboard page', () => {
 
-    test.use({ storageState: adminAuthDataFilePath });
+    test.use({ storageState: AdminAuthDataFilePath });
 
     test('user navigates List All Exam Runs', async ({ page }) => {
         await page.goto(HOME_URL);
@@ -82,7 +82,7 @@ test.describe('Admin user or Parent user uses Dashboard page', () => {
 
 test.describe('Admin user uses Problems menu on Dashboard page', () => {
 
-    test.use({ storageState: adminAuthDataFilePath });
+    test.use({ storageState: AdminAuthDataFilePath });
 
     test('user navigates Browse Problems', async ({ page }) => {
         await page.goto(HOME_URL);

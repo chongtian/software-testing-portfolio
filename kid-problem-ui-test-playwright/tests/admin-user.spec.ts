@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
-import {HOME_URL, adminAuthDataFilePath} from '../utils/constants'
+import {HOME_URL, AdminAuthDataFilePath} from '../utils/constants'
 
-test.use({ storageState: adminAuthDataFilePath });
+test.use({ storageState: AdminAuthDataFilePath });
 
 test('admin user can see dashboard', async ({ page }) => {
     await page.goto(HOME_URL);
