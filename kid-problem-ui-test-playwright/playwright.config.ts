@@ -34,6 +34,7 @@ export default defineConfig({
     // for development, we can set trace to 'on' to get trace for all tests, so that we can easily debug any failure.
      trace: 'on-first-retry',
      screenshot: 'only-on-failure',
+     timezoneId: 'America/Chicago',     
   },
 
   /* Configure projects for major browsers */
