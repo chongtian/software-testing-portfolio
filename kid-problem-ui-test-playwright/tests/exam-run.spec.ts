@@ -1,7 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { AdminAuthDataFilePath } from '../utils/constants'
 import { ExamRunQueryPage } from '../pages/ExamRunQueryPage';
-import { describe } from 'node:test';
 import { ExamRunViewPage } from '../pages/ExamRunViewPage';
 
 test.describe('Exam Run Query', () => {
@@ -40,7 +39,7 @@ test.describe('Exam Run Query', () => {
 
 });
 
-describe('Exam Run View', () => {
+test.describe('Exam Run View', () => {
     test.use({ storageState: AdminAuthDataFilePath });
 
     test('User open Exam Run View', async ({ page }) => {
