@@ -1,10 +1,10 @@
 import { test, expect } from '@playwright/test';
-import { adminAuthDataFilePath } from '../utils/constants'
+import { AdminAuthDataFilePath } from '../utils/constants'
 import { ExamSummaryPage } from '../pages/ExamSummaryPage';
 
 test.describe('Exam Summary', () => {
 
-    test.use({ storageState: adminAuthDataFilePath });
+    test.use({ storageState: AdminAuthDataFilePath });
 
     test('Exam Summary table shows correct heads', async ({ page }) => {
         const examSummaryPage = new ExamSummaryPage(page);

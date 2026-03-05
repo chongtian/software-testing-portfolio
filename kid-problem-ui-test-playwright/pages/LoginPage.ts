@@ -1,5 +1,5 @@
 import { expect, type Locator, type Page } from '@playwright/test';
-import { adminAuthDataFilePath, LOGIN_URL } from '../utils/constants'
+import { AdminAuthDataFilePath, LOGIN_URL } from '../utils/constants'
 
 export class LoginPage {
 
