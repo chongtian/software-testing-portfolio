@@ -38,12 +38,17 @@ jobs:
         TEST_CHILD_USERNAME: ${{ secrets.TEST_CHILD_USERNAME }}
         TEST_CHILD_PASSWORD: ${{ secrets.TEST_CHILD_PASSWORD }}
 
-    - run: ls
-    - run: ls ./playwright-report/*
+    - name: Upload Test Results
+      uses: actions/upload-artifact@v4
+      if: failure()
+      with:
+        name: test-results
+        path: test-results
+        retention-days: 30
 
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
       with:
         name: playwright-report
-        path: playwright-report/
+        path: playwright-report
         retention-days: 30
