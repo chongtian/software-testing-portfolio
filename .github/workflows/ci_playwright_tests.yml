@@ -43,12 +43,12 @@ jobs:
       if: failure()
       with:
         name: test-results
-        path: test-results
+        path: kid-problem-ui-test-playwright/test-results/
         retention-days: 30
 
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
       with:
         name: playwright-report
-        path: playwright-report
+        path: kid-problem-ui-test-playwright/playwright-report/
         retention-days: 30
