@@ -12,6 +12,8 @@ jobs:
 
     timeout-minutes: 60
     runs-on: ubuntu-latest
+    env:
+      TZ: America/Chicag
     defaults:
       run:
         working-directory: ./kid-problem-ui-test-playwright
