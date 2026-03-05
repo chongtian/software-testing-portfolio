@@ -19,15 +19,16 @@ export class LoginPage {
         await this.page.goto(LOGIN_URL);
     }
 
-    async login(username: string, password: string) {
+    async login(username: string, password: string, pathToStorage: string = null) {
         await this.usernameField.fill(username);
         await this.passwordField.fill(password);
         await this.signInButton.click();
         await expect(this.page).toHaveURL(/home/);
-        await expect(this.page.getByText('List Exam Summaries')).toBeVisible();
+        await expect(this.page.getByText('Latest Assignments')).toBeVisible();
 
-        // End of authentication steps.
-        const authFile = adminAuthDataFilePath
-        await this.page.context().storageState({ path: authFile });
+        if (pathToStorage) {
+            await this.page.context().storageState({ path: pathToStorage });
+        }
+
     }
 }
