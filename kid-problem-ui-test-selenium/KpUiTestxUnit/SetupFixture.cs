@@ -17,10 +17,10 @@ namespace KpUiTestxUnit
         private readonly string ChildUserKey = "child";
 
         private readonly string EnvVarPrefix = "KPUITEST_";
-        private readonly string AdminUsernameEnvVarName = "ADMIN:USERNAME";
-        private readonly string AdminPasswordEnvVarName = "ADMIN:PASSWORD";
-        private readonly string ChildUsernameEnvVarName = "CHILD:USERNAME";
-        private readonly string ChildPasswordEnvVarName = "CHILD:PASSWORD";
+        private readonly string AdminUsernameEnvVarName = "ADMIN_USERNAME";
+        private readonly string AdminPasswordEnvVarName = "ADMIN_PASSWORD";
+        private readonly string ChildUsernameEnvVarName = "CHILD_USERNAME";
+        private readonly string ChildPasswordEnvVarName = "CHILD_PASSWORD";
 
         public static string AdminUsername { get; private set; } = "";
         public static string AdminPassword { get; private set; } = "";
