@@ -1,7 +1,10 @@
+using KpUiTestxUnit;
 using KpUiTestxUnit.Pages;
 using KpUiTestxUnit.Utilties;
 using Microsoft.Extensions.Configuration;
 using OpenQA.Selenium;
+
+[assembly: AssemblyFixture(typeof(SetupFixture))]
 
 namespace KpUiTestxUnit
 {
@@ -18,7 +21,7 @@ namespace KpUiTestxUnit
         private readonly string AdminPasswordEnvVarName = "KPUITEST_ADMIN_PASSWORD";
         private readonly string ChildUsernameEnvVarName = "KPUITEST_CHILD_USERNAME";
         private readonly string ChildPasswordEnvVarName = "KPUITEST_CHILD_PASSWORD";
-        
+
         public static string AdminUsername { get; private set; } = "";
         public static string AdminPassword { get; private set; } = "";
         public static string ChildUsername { get; private set; } = "";
@@ -39,6 +42,10 @@ namespace KpUiTestxUnit
             {
                 Assert.Fail("Login of admin user failed. Please check credentials and application status.");
             }
+            else
+            {
+                Console.WriteLine("Successfully login with admin user.");
+            }
 
             var cookies = driver.Manage().Cookies.AllCookies;
             _authCookieStore.Add(AdminUserKey, cookies);
@@ -56,6 +63,10 @@ namespace KpUiTestxUnit
             if (!loginPage.Login(ChildUsername, ChildPassword))
             {
                 Assert.Fail("Login of child user failed. Please check credentials and application status.");
+            }
+            else
+            {
+                Console.WriteLine("Successfully login with child user.");
             }
 
             cookies = driver.Manage().Cookies.AllCookies;
