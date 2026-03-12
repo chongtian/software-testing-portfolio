@@ -2,6 +2,7 @@ using KpUiTestxUnit;
 using KpUiTestxUnit.Pages;
 using KpUiTestxUnit.Utilties;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Primitives;
 using OpenQA.Selenium;
 
 [assembly: AssemblyFixture(typeof(SetupFixture))]
@@ -34,54 +35,14 @@ namespace KpUiTestxUnit
             ReadConfigurations();
             InitializePageFactory();
 
-            // login - admin user
-            IWebDriver driver = WebDriverUtility.GetDriver();
+            InitialLogin(true, 3);
+            InitialLogin(false, 3);
 
-            var loginPage = new LoginPage(driver);
-            if (!loginPage.Login(AdminUsername, AdminPassword))
-            {
-                Assert.Fail("Login of admin user failed. Please check credentials and application status.");
-            }
-            else
-            {
-                Console.WriteLine("Successfully login with admin user.");
-            }
-
-            var cookies = driver.Manage().Cookies.AllCookies;
-            _authCookieStore.Add(AdminUserKey, cookies);
-
-            IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
-            _localStorageStore.Add(AdminUserKey, js.ExecuteScript("return JSON.stringify(localStorage);")!.ToString());
-
-            driver.Quit();
-            driver.Dispose();
-
-            // login - child user
-            driver = WebDriverUtility.GetDriver();
-
-            loginPage = new LoginPage(driver);
-            if (!loginPage.Login(ChildUsername, ChildPassword))
-            {
-                Assert.Fail("Login of child user failed. Please check credentials and application status.");
-            }
-            else
-            {
-                Console.WriteLine("Successfully login with child user.");
-            }
-
-            cookies = driver.Manage().Cookies.AllCookies;
-            _authCookieStore.Add(ChildUserKey, cookies);
-
-            js = (IJavaScriptExecutor)driver;
-            _localStorageStore.Add(ChildUserKey, js.ExecuteScript("return JSON.stringify(localStorage);")!.ToString());
-
-            driver.Quit();
-            driver.Dispose();
         }
 
         public IWebDriver GetDriverAndInjectSession(bool isAdminUser = true)
         {
-            IWebDriver driver = WebDriverUtility.GetDriver();
+            IWebDriver driver = WebDriverUtility.GetChromeDriver();
 
             // 1. Navigate to the domain first
             driver.Navigate().GoToUrl(Constants.BASE_URL);
@@ -104,7 +65,6 @@ namespace KpUiTestxUnit
 
             return driver;
         }
-
 
         public void Dispose()
         {
@@ -161,6 +121,48 @@ namespace KpUiTestxUnit
                 Assert.Fail(
                     "Credentials not provided. Set them in testsettings.json or via env vars. ");
             }
+        }
+
+
+        private void InitialLogin(bool isAdminUser, int maxAttempts)
+        {
+            string username = isAdminUser ? AdminUsername : ChildUsername;
+            string password = isAdminUser ? AdminPassword : ChildPassword;
+            string storeKey = isAdminUser ? AdminUserKey : ChildUserKey;
+            bool isSuccessful = false;
+            int cnt = 0;
+
+            while (cnt < maxAttempts && !isSuccessful)
+            {
+                IWebDriver driver = WebDriverUtility.GetChromeDriver();
+
+                var loginPage = new LoginPage(driver);
+                if (loginPage.Login(username, password))
+                {
+                    var cookies = driver.Manage().Cookies.AllCookies;
+                    _authCookieStore.Add(storeKey, cookies);
+
+                    IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
+                    _localStorageStore.Add(storeKey, js.ExecuteScript("return JSON.stringify(localStorage);")!.ToString());
+
+                    isSuccessful = true;
+                }
+
+                driver.Quit();
+                driver.Dispose();
+
+                cnt++;
+            }
+
+            if (!isSuccessful)
+            {
+                Assert.Fail($"Failed to login {storeKey} user after {maxAttempts} attempts.");
+            }
+            else
+            {
+                Console.WriteLine($"Successfully log in {storeKey} user in {cnt} attempt(s).");
+            }
+
         }
 
         private void InitializePageFactory()

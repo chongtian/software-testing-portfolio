@@ -6,7 +6,7 @@ namespace KpUiTestxUnit;
 
 public class WebDriverUtility
 {
-    public static IWebDriver GetDriver()
+    public static IWebDriver GetChromeDriver()
     {
         ChromeOptions options = new ChromeOptions();
         options.AddArgument("--headless");  // Run the browser in headless mode for CI environments
