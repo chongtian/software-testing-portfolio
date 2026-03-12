@@ -49,7 +49,7 @@ public sealed class ExamRunQueryPage : PageBase
         {
             btn.Click();
             IsNotLoading();
-        } 
+        }
     }
 
     public string GetExamTitleFromQueryResult(int index)

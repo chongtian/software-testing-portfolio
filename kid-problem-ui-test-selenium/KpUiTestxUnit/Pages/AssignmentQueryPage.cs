@@ -10,7 +10,7 @@ public sealed class AssignmentQueryPage : PageBase
     private readonly By endTimeField = By.Name("endTime");
     private readonly By searchButton = By.CssSelector("app-assignment-list-view form button:nth-child(2)");
     private readonly By returnResultTableRows = By.CssSelector("app-assignment-list-view tr");
-    private readonly By countField = By.CssSelector("app-assignment-list-view .w3-cell-row div.w3-cell:not(.w3-container)");    
+    private readonly By countField = By.CssSelector("app-assignment-list-view .w3-cell-row div.w3-cell:not(.w3-container)");
 
     public AssignmentQueryPage(IWebDriver driver) : base(driver)
     { }

@@ -8,15 +8,21 @@ namespace KpUiTestxUnit
     public class SetupFixture : IDisposable
     {
 
-        private IReadOnlyCollection<Cookie> AuthCookies { get; set; }
-        private string? LocalStorage { get; set; }
+        private readonly Dictionary<string, IReadOnlyCollection<Cookie>> _authCookieStore = new();
+        private readonly Dictionary<string, string> _localStorageStore = new();
+        private readonly string AdminUserKey = "admin";
+        private readonly string ChildUserKey = "child";
 
         private readonly string EnvVarPrefix = "KPUITEST_";
-        private readonly string UsernameEnvVarName = "KPUITEST_USERNAME";
-        private readonly string PasswordEnvVarName = "KPUITEST_PASSWORD";
-        private readonly string TimeoutEnvVarName = "KPUITEST_TIMEOUT";
-        public static string Username { get; private set; } = "";
-        public static string Password { get; private set; } = "";
+        private readonly string AdminUsernameEnvVarName = "KPUITEST_ADMIN_USERNAME";
+        private readonly string AdminPasswordEnvVarName = "KPUITEST_ADMIN_PASSWORD";
+        private readonly string ChildUsernameEnvVarName = "KPUITEST_CHILD_USERNAME";
+        private readonly string ChildPasswordEnvVarName = "KPUITEST_CHILD_PASSWORD";
+        
+        public static string AdminUsername { get; private set; } = "";
+        public static string AdminPassword { get; private set; } = "";
+        public static string ChildUsername { get; private set; } = "";
+        public static string ChildPassword { get; private set; } = "";
         public static string BaseUrl { get; private set; } = "";
         public static int TimeoutInSeconds { get; private set; } = 10;
 
@@ -25,40 +31,61 @@ namespace KpUiTestxUnit
             ReadConfigurations();
             InitializePageFactory();
 
+            // login - admin user
             IWebDriver driver = WebDriverUtility.GetDriver();
 
-            // login
             var loginPage = new LoginPage(driver);
-            if (!loginPage.Login(Username, Password))
+            if (!loginPage.Login(AdminUsername, AdminPassword))
             {
-                Assert.Fail("Login failed. Please check credentials and application status.");
+                Assert.Fail("Login of admin user failed. Please check credentials and application status.");
             }
 
-            AuthCookies = driver.Manage().Cookies.AllCookies;
+            var cookies = driver.Manage().Cookies.AllCookies;
+            _authCookieStore.Add(AdminUserKey, cookies);
 
             IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
-            LocalStorage = js.ExecuteScript("return JSON.stringify(localStorage);")!.ToString();
+            _localStorageStore.Add(AdminUserKey, js.ExecuteScript("return JSON.stringify(localStorage);")!.ToString());
+
+            driver.Quit();
+            driver.Dispose();
+
+            // login - child user
+            driver = WebDriverUtility.GetDriver();
+
+            loginPage = new LoginPage(driver);
+            if (!loginPage.Login(ChildUsername, ChildPassword))
+            {
+                Assert.Fail("Login of child user failed. Please check credentials and application status.");
+            }
+
+            cookies = driver.Manage().Cookies.AllCookies;
+            _authCookieStore.Add(ChildUserKey, cookies);
+
+            js = (IJavaScriptExecutor)driver;
+            _localStorageStore.Add(ChildUserKey, js.ExecuteScript("return JSON.stringify(localStorage);")!.ToString());
 
             driver.Quit();
             driver.Dispose();
         }
 
-        public IWebDriver GetDriverAndInjectSession()
+        public IWebDriver GetDriverAndInjectSession(bool isAdminUser = true)
         {
             IWebDriver driver = WebDriverUtility.GetDriver();
 
             // 1. Navigate to the domain first
             driver.Navigate().GoToUrl(Constants.BASE_URL);
 
+            string userKey = isAdminUser ? AdminUserKey : ChildUserKey;
+
             // 2. Inject Cookies
-            foreach (var cookie in AuthCookies)
+            foreach (var cookie in _authCookieStore[userKey])
             {
                 driver.Manage().Cookies.AddCookie(cookie);
             }
 
             // 3. Inject Local Storage (via JS)
             IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
-            js.ExecuteScript($"var data = {LocalStorage}; for(var key in data) {{ localStorage.setItem(key, data[key]); }}");
+            js.ExecuteScript($"var data = {_localStorageStore[userKey]}; for(var key in data) {{ localStorage.setItem(key, data[key]); }}");
 
             // 4. Refresh to reflect the logged-in state
             driver.Navigate().GoToUrl(Constants.HOME_URL);
@@ -73,7 +100,6 @@ namespace KpUiTestxUnit
             // Runs ONCE after all tests 
         }
 
-
         private void ReadConfigurations()
         {
             string basePath = AppDomain.CurrentDomain.BaseDirectory;
@@ -85,8 +111,10 @@ namespace KpUiTestxUnit
                             .AddEnvironmentVariables(prefix: EnvVarPrefix)
                             .Build();
 
-            Username = config["Credentials:Username"] ?? "";
-            Password = config["Credentials:Password"] ?? "";
+            AdminUsername = config["Credentials:AdminUsername"] ?? "";
+            AdminPassword = config["Credentials:AdminPassword"] ?? "";
+            ChildUsername = config["Credentials:ChildUsername"] ?? "";
+            ChildPassword = config["Credentials:ChildPassword"] ?? "";
             BaseUrl = config["BaseUrl"] ?? "";
             if (int.TryParse(config["TimeoutInSeconds"] ?? "10", out int t) && t > 0)
             {
@@ -94,13 +122,21 @@ namespace KpUiTestxUnit
             }
 
             // If Username or Password is blank, try to get then from Environment Variables
-            if (string.IsNullOrEmpty(Username))
+            if (string.IsNullOrEmpty(AdminUsername))
             {
-                Username = Environment.GetEnvironmentVariable(UsernameEnvVarName) ?? "";
+                AdminUsername = Environment.GetEnvironmentVariable(AdminUsernameEnvVarName) ?? "";
             }
-            if (string.IsNullOrEmpty(Password))
+            if (string.IsNullOrEmpty(AdminPassword))
             {
-                Password = Environment.GetEnvironmentVariable(PasswordEnvVarName) ?? "";
+                AdminPassword = Environment.GetEnvironmentVariable(AdminPasswordEnvVarName) ?? "";
+            }
+            if (string.IsNullOrEmpty(ChildUsername))
+            {
+                ChildUsername = Environment.GetEnvironmentVariable(ChildUsernameEnvVarName) ?? "";
+            }
+            if (string.IsNullOrEmpty(ChildPassword))
+            {
+                ChildPassword = Environment.GetEnvironmentVariable(ChildPasswordEnvVarName) ?? "";
             }
 
             if (string.IsNullOrWhiteSpace(BaseUrl))
@@ -108,11 +144,11 @@ namespace KpUiTestxUnit
                 Assert.Fail("BaseUrl not provided. Set thitem in testsettings.local.json.");
             }
 
-            if (string.IsNullOrWhiteSpace(Username) || string.IsNullOrWhiteSpace(Password))
+            if (string.IsNullOrWhiteSpace(AdminUsername) || string.IsNullOrWhiteSpace(AdminPassword)
+                || string.IsNullOrWhiteSpace(ChildUsername) || string.IsNullOrWhiteSpace(ChildPassword))
             {
                 Assert.Fail(
-                    "Credentials not provided. Set them in testsettings.local.json or via env vars " +
-                    "TEST_CREDENTIALS__USERNAME / TEST_CREDENTIALS__PASSWORD (or TEST_USERNAME / TEST_PASSWORD).");
+                    "Credentials not provided. Set them in testsettings.local.json or via env vars. ");
             }
         }
 

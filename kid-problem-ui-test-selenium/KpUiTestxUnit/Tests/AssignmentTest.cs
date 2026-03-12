@@ -11,7 +11,7 @@ namespace KpUiTestxUnit.Tests
             yield return new object?[] { TestDataAssignment.Test1 };
         }
 
-        public AssignmentTest(SetupFixture fixture) : base(fixture)
+        public AssignmentTest(SetupFixture fixture) : base(fixture, true)
         {
 
         }

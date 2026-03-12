@@ -13,7 +13,7 @@ namespace KpUiTestxUnit.Tests
             yield return new object?[] { TestDataUserCreateExamDefinition.Test2 };
         }
 
-        public ExamDefinitionTest(SetupFixture fixture) : base(fixture)
+        public ExamDefinitionTest(SetupFixture fixture) : base(fixture, true)
         {
 
         }

@@ -5,7 +5,7 @@ namespace KpUiTestxUnit.Pages;
 public class ProblemUploadAnswersPage : PageBase
 {
     public readonly static string PageUrl = $"{Constants.BASE_URL}/problem/answers";
-    
+
     public ProblemUploadAnswersPage(IWebDriver driver) : base(driver) { }
 
     public override bool IsPageLoaded(bool withData = false)
