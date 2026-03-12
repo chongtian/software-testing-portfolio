@@ -5,7 +5,7 @@ namespace KpUiTestxUnit.Tests
 
     public class ProblemTest : TestBase
     {
-        public ProblemTest(SetupFixture fixture) : base(fixture)
+        public ProblemTest(SetupFixture fixture) : base(fixture, true)
         { }
 
         [Theory]
@@ -57,7 +57,7 @@ namespace KpUiTestxUnit.Tests
             page.SelectAllStagingProblems(keyword);
             var results = _wait.Until(d => d.FindElements(page.GetStagingProblems()));
             Assert.Equal(expectedCount, results.Count);
-            Assert.Contains(firstRecord, results[0].Text); 
+            Assert.Contains(firstRecord, results[0].Text);
         }
 
         [Fact]
@@ -68,7 +68,7 @@ namespace KpUiTestxUnit.Tests
             Assert.True(page.IsPageLoaded());
 
             page.GenerateAnswers("AMC12", "2020A", "A\nB\nC\nD\nE");
-            var result = page.GetGeneratedAnswers(); 
+            var result = page.GetGeneratedAnswers();
             Assert.NotNull(result);
             var answers = result.Split("\n");
             Assert.Equal(5, answers.Length);

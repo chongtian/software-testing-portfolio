@@ -11,8 +11,8 @@ namespace KpUiTestNUnit
     {
 
         private readonly string EnvVarPrefix = "KPUITEST_";
-        private readonly string UsernameEnvVarName = "KPUITEST_USERNAME";
-        private readonly string PasswordEnvVarName = "KPUITEST_PASSWORD";
+        private readonly string UsernameEnvVarName = "USERNAME";
+        private readonly string PasswordEnvVarName = "PASSWORD";
         public static string Username { get; private set; } = "";
         public static string Password { get; private set; } = "";
         public static string BaseUrl { get; private set; } = "";
@@ -67,23 +67,22 @@ namespace KpUiTestNUnit
             // If Username or Password is blank, try to get then from Environment Variables
             if (string.IsNullOrEmpty(Username))
             {
-                Username = Environment.GetEnvironmentVariable(UsernameEnvVarName) ?? "";
+                Username = config[UsernameEnvVarName] ?? "";
             }
             if (string.IsNullOrEmpty(Password))
             {
-                Password = Environment.GetEnvironmentVariable(PasswordEnvVarName) ?? "";
+                Password = config[PasswordEnvVarName] ?? "";
             }
 
             if (string.IsNullOrWhiteSpace(BaseUrl))
             {
-                Assert.Inconclusive("BaseUrl not provided. Set thitem in testsettings.local.json.");
+                Assert.Inconclusive("BaseUrl not provided. Set the item in testsettings.json.");
             }
 
             if (string.IsNullOrWhiteSpace(Username) || string.IsNullOrWhiteSpace(Password))
             {
                 Assert.Inconclusive(
-                    "Credentials not provided. Set them in testsettings.local.json or via env vars " +
-                    "TEST_CREDENTIALS__USERNAME / TEST_CREDENTIALS__PASSWORD (or TEST_USERNAME / TEST_PASSWORD).");
+                    "Credentials not provided. Set them in testsettings.json or via env vars ");
             }
         }
 
