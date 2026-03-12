@@ -10,6 +10,7 @@ public class WebDriverUtility
     {
         ChromeOptions options = new ChromeOptions();
         options.AddArgument("headless");  // Run the browser in headless mode for CI environments
+        options.AddArgument("--timezone=America/Chicago"); // Test data are sensitive to timezone
         IWebDriver driver = new ChromeDriver(options);
         driver.Manage().Window.Size = new System.Drawing.Size(1920, 1080);
         return driver;

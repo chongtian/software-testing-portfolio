@@ -17,10 +17,10 @@ namespace KpUiTestxUnit
         private readonly string ChildUserKey = "child";
 
         private readonly string EnvVarPrefix = "KPUITEST_";
-        private readonly string AdminUsernameEnvVarName = "KPUITEST_ADMIN_USERNAME";
-        private readonly string AdminPasswordEnvVarName = "KPUITEST_ADMIN_PASSWORD";
-        private readonly string ChildUsernameEnvVarName = "KPUITEST_CHILD_USERNAME";
-        private readonly string ChildPasswordEnvVarName = "KPUITEST_CHILD_PASSWORD";
+        private readonly string AdminUsernameEnvVarName = "ADMIN:USERNAME";
+        private readonly string AdminPasswordEnvVarName = "ADMIN:PASSWORD";
+        private readonly string ChildUsernameEnvVarName = "CHILD:USERNAME";
+        private readonly string ChildPasswordEnvVarName = "CHILD:PASSWORD";
 
         public static string AdminUsername { get; private set; } = "";
         public static string AdminPassword { get; private set; } = "";
@@ -135,19 +135,19 @@ namespace KpUiTestxUnit
             // If Username or Password is blank, try to get then from Environment Variables
             if (string.IsNullOrEmpty(AdminUsername))
             {
-                AdminUsername = Environment.GetEnvironmentVariable(AdminUsernameEnvVarName) ?? "";
+                AdminUsername = config[AdminUsernameEnvVarName] ?? "";
             }
             if (string.IsNullOrEmpty(AdminPassword))
             {
-                AdminPassword = Environment.GetEnvironmentVariable(AdminPasswordEnvVarName) ?? "";
+                AdminPassword = config[AdminPasswordEnvVarName] ?? "";
             }
             if (string.IsNullOrEmpty(ChildUsername))
             {
-                ChildUsername = Environment.GetEnvironmentVariable(ChildUsernameEnvVarName) ?? "";
+                ChildUsername = config[ChildUsernameEnvVarName] ?? "";
             }
             if (string.IsNullOrEmpty(ChildPassword))
             {
-                ChildPassword = Environment.GetEnvironmentVariable(ChildPasswordEnvVarName) ?? "";
+                ChildPassword = config[ChildPasswordEnvVarName] ?? "";
             }
 
             if (string.IsNullOrWhiteSpace(BaseUrl))
