@@ -60,7 +60,7 @@ namespace KpUiTestxUnit.Tests
             var page = new ExamDefEditPage(_driver);
             Assert.True(page.IsPageLoaded(true));
 
-            string? examCategory = page.GetSelectExamcCategory();
+            string? examCategory = page.GetSelectExamCategory();
             string? examTitle = page.GetExamTitle();
             Assert.True(TestDataHelper.EncodeUrl($"{examCategory}/{examTitle}") == testExamDefTitle);
 
@@ -95,7 +95,7 @@ namespace KpUiTestxUnit.Tests
             Assert.True(page.IsPageLoaded(true));
 
             // Verify we are on the correct Exam Def
-            string? examCategory = page.GetSelectExamcCategory();
+            string? examCategory = page.GetSelectExamCategory();
             string? examTitle = page.GetExamTitle();
             Assert.True($"{examCategory}/{examTitle}" == testExamDefTitle);
 
