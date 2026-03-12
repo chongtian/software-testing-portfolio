@@ -148,7 +148,7 @@ namespace KpUiTestxUnit
                 || string.IsNullOrWhiteSpace(ChildUsername) || string.IsNullOrWhiteSpace(ChildPassword))
             {
                 Assert.Fail(
-                    "Credentials not provided. Set them in testsettings.local.json or via env vars. ");
+                    "Credentials not provided. Set them in testsettings.json or via env vars. ");
             }
         }
 
