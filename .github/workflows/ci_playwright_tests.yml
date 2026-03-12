@@ -2,8 +2,12 @@ name: Playwright Tests - KidProblem
 on:
   push:
     branches: [ main ]
+    paths:
+      - kid-problem-ui-test-playwright/**
   pull_request:
     branches: [ main ]
+    paths:
+      - kid-problem-ui-test-playwright/**    
   workflow_dispatch:  # Allows manual triggering from the Actions tab
 
 jobs:
