@@ -141,7 +141,7 @@ namespace KpUiTestxUnit
 
             if (string.IsNullOrWhiteSpace(BaseUrl))
             {
-                Assert.Fail("BaseUrl not provided. Set thitem in testsettings.local.json.");
+                Assert.Fail("BaseUrl not provided. Set the item in testsettings.json.");
             }
 
             if (string.IsNullOrWhiteSpace(AdminUsername) || string.IsNullOrWhiteSpace(AdminPassword)

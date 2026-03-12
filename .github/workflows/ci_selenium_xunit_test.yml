@@ -36,9 +36,9 @@ jobs:
 
 
     - name: Run xUnit Tests
-      run: dotnet test --configuration Release --no-build --logger "trx;LogFileName=test_results.trx
+      run: dotnet test --configuration Release --no-build --logger "trx;LogFileName=test_results.trx"
       env:
-        BASE_URL: ${{ vars.BASE_URL }}
+        # BASE_URL: ${{ vars.BASE_URL }}
         KPUITEST_ADMIN_USERNAME: ${{ secrets.TEST_USER_USERNAME }}
         KPUITEST_ADMIN_PASSWORD: ${{ secrets.TEST_USER_PASSWORD }}
         KPUITEST_CHILD_USERNAME: ${{ secrets.TEST_CHILD_USERNAME }}
