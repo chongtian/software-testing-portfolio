@@ -60,8 +60,8 @@ test.describe('Import Bank', () => {
         const importedBankInfo = await importPage.getImportedBankInfo();
         expect(importedBankInfo.length).toBe(3);
         expect(importedBankInfo[0].TrnDate.trim()).toBe('3/11/2026');
-        expect(importedBankInfo[0].TrnDesc.trim()).toBe('MOBILE DEPOSIT : REF NUMBER :808110413977');
-        expect(importedBankInfo[0].TrnAmount.trim()).toBe('$912.00');
+        expect(importedBankInfo[0].TrnDesc.trim()).toBe('MOBILE DEPOSIT : REF NUMBER :808110XXXXXX');
+        expect(importedBankInfo[0].TrnAmount.trim()).toBe('$1012.00');
         expect(importedBankInfo[0].TrnType.trim()).toBe('客户收款');
     });
 
@@ -82,8 +82,8 @@ test.describe('Import Bank', () => {
         await viewPage.goto(Number(bankIDs[0]));
         const bank = await viewPage.getBankInfo();
         expect(bank.TrnDate.trim()).toBe('3/2/2025');
-        expect(bank.TrnDesc.trim()).toBe('RECURRING TRANSFER TO TANG L REF #OP0X2K64LJ EVERYDAY CHECKING LIMING SALARY');
-        expect(bank.TrnAmount.trim()).toBe('-$2,500.00');
+        expect(bank.TrnDesc.trim()).toBe('RECURRING TRANSFER TO T L REF #OP0XXXXXX EVERYDAY CHECKING L SALARY');
+        expect(bank.TrnAmount.trim()).toBe('-$5,500.00');
 
         // rollback the imported data
         const apiHelper = await ApiHelper.create();
