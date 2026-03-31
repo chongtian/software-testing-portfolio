@@ -23,7 +23,7 @@ export class ViewPaymentPage {
         const list: PaymentInfo[] = [];
 
         // Header
-        const header = new PaymentInfo();
+        const header: PaymentInfo = {};
         header.PartyName = await this.page.locator('#viewPartyName').textContent();
         header.PayDocNum = await this.page.locator('#viewPayDocNum').textContent();
         header.PayDocDate = await this.page.locator('#viewPayDocDate').textContent();
@@ -38,7 +38,7 @@ export class ViewPaymentPage {
         const details = this.page.getByTestId('details');
         await details.waitFor({ state: 'visible' });
         for (const loc of await details.locator('tbody tr').all()) {
-            const detail = new PaymentInfo();
+            const detail: PaymentInfo = {};
             detail.InvNumber = await loc.getByTestId('invNumber').textContent();
             detail.PoNumber = await loc.getByTestId('poNumber').textContent();
             detail.PartNumber = await loc.getByTestId('partNumber').textContent();

@@ -1,3 +1,4 @@
 export * from './constants';
 export * from './display-message';
-export * from './waitForNoMatProgressBar';
+export * from './wait-for-functions';
+export * from './api-helper';

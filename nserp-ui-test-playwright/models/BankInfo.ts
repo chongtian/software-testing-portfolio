@@ -1,8 +1,8 @@
-export class BankInfo {
-    TrnAccount: string | null | undefined;
-    TrnDate: string | null | undefined;
-    TrnType: string | null | undefined;
-    TrnDesc: string | null | undefined;
-    TrnAmount: string | null | undefined;
-    Memo: string | null | undefined;
+export interface BankInfo {
+    TrnAccount?: string | null;
+    TrnDate?: string | null;
+    TrnType?: string | null;
+    TrnDesc?: string | null;
+    TrnAmount?: string | null;
+    Memo?: string | null;
 }

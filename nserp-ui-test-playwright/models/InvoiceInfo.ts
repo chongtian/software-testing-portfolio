@@ -1,22 +1,22 @@
-export class InvoiceInfo {
-    PartyName: string | null | undefined;
-    InvNumber: string | null | undefined;
-    InvDate: string | null | undefined;
-    SentDate: string | null | undefined;
-    InvAmount: string | null | undefined;
-    HeaderMemo: string | null | undefined;
-    HeaderStatus: string | null | undefined;
+export interface InvoiceInfo {
+    PartyName?: string | null;
+    InvNumber?: string | null;
+    InvDate?: string | null;
+    SentDate?: string | null;
+    InvAmount?: string | null;
+    HeaderMemo?: string | null;
+    HeaderStatus?: string | null;
 
-    ShipName: string | null | undefined;
-    ShipDate: string | null | undefined;
-    PoNumber: string | null | undefined;
-    PartNumber: string | null | undefined;
-    ProductNameEn: string | null | undefined;
-    ProductNameCn: string | null | undefined;
-    Content: string | null | undefined;
-    Amount: string | null | undefined;
-    Price: string | null | undefined;
-    Qty: string | null | undefined;
-    DetailMemo: string | null | undefined;
-    DetailStatus: string | null | undefined;
+    ShipName?: string | null;
+    ShipDate?: string | null;
+    PoNumber?: string | null;
+    PartNumber?: string | null;
+    ProductNameEn?: string | null;
+    ProductNameCn?: string | null;
+    Content?: string | null;
+    Amount?: string | null;
+    Price?: string | null;
+    Qty?: string | null;
+    DetailMemo?: string | null;
+    DetailStatus?: string | null;
 }

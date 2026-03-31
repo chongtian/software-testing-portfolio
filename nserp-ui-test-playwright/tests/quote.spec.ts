@@ -1,6 +1,8 @@
 import test, { expect } from "@playwright/test";
-import { AdminAuthDataFilePath } from "@ui-test/utils";
-import { ViewProductPage, ViewQuotePage, ListQuotePage } from "@ui-test/pages";
+import { AdminAuthDataFilePath, LocalTestDataFilePath, waitForNoOverlay } from "@ui-test/utils";
+import { ViewProductPage, ViewQuotePage, ListQuotePage, EditQuotePage } from "@ui-test/pages";
+import { ApiHelper } from "@ui-test/utils/api-helper";
+import * as fs from 'fs';
 
 // test.describe.configure({ mode: 'parallel' });
 test.use({ storageState: AdminAuthDataFilePath });
@@ -63,5 +65,98 @@ test.describe('View Quote', () => {
         expect(product[1].PartNumber.trim()).toBe('10501');
     });
 
+});
+
+test.describe('Create and Update Quote', () => {
+
+    test('User creates a quote', async ({ page }) => {
+        const editPage = new EditQuotePage(page);
+        await editPage.goto(null);
+
+        await editPage.selectParty('Sunkist Growers Inc.');
+        await editPage.enterQuoteDate('3/25/2020');
+        await editPage.enterQuoteName('TEST SGI QUOTE 001');
+        await editPage.enterExchangeRate('6.8');
+        await editPage.enterHeaderMemo('UI TEST');
+        await editPage.clickAddDetailButton();
+
+        await editPage.queryPage.enterKeyword('04A');
+        await editPage.queryPage.clickSearchButton();
+        await editPage.queryPage.clickRecords([0]);
+        await editPage.queryPage.clickSelectButton();
+        await editPage.queryPage.waitForPageUnload();
+
+        expect(await editPage.getDetailPartNumber(0)).toContain('04A-CF');
+        expect(await editPage.getDetailProductNameEn(0)).toContain('04A-CF STRAINER WITH QUICK PULL OF TABS');
+
+        await editPage.enterDetailWeight(0, '0.2');
+        await editPage.enterDetailQty(0, '1000');
+        await editPage.enterDetailBasicCost(0, '100');
+        await editPage.enterDetailExtraCost(0, '10');
+        await editPage.enterDetailFreightCost(0, '15');
+        await editPage.enterDetailDutyCost(0, '800');
+        await editPage.enterDetailProfitRate(0, '0.35');
+        await editPage.enterDetailLeadtime(0, '120');
+        await editPage.enterDetailMemo(0, 'UI DETAIL TEST');
+
+        expect(await editPage.getDetailPrice(0)).toBe('839.89');
+
+        await editPage.clickSaveButton();
+
+        await expect(page).toHaveURL(/quote\/view\/\d+/);
+
+        // rollback
+        const newId = page.url().split('/').pop();
+        const apiHelper = await ApiHelper.create();
+        await apiHelper.delete(`/api/quote/${newId}`);
+        await apiHelper.dispose();
+
+    });
+
+    test('User updated a quote', async ({ page }) => {
+        const editPage = new EditQuotePage(page);
+        await editPage.goto(196);
+
+        await editPage.enterQuoteDate('3/25/2020');
+        await editPage.enterQuoteName('TEST SGI QUOTE 002');
+        await editPage.enterExchangeRate('7.0');
+        await editPage.enterHeaderMemo('UPDATE TEST');
+
+        await editPage.enterDetailWeight(0, '0.3');
+        await editPage.enterDetailQty(0, '2000');
+        await editPage.enterDetailFreightCost(0, '10');
+        await editPage.enterDetailProfitRate(0, '0.35');
+        await editPage.enterDetailLeadtime(0, '150');
+        await editPage.enterDetailMemo(0, 'UI DETAIL UPDATE');
+        await editPage.selectDetailStatus(0, '锁定');
+        await editPage.enterDetailPrice(0, '840');
+
+        await editPage.clickSaveButton();
+        await waitForNoOverlay(page);
+
+        // assert through API
+        const apiHelper = await ApiHelper.create();
+        const quote = await apiHelper.get(`/api/quote/196`);
+
+        // rollback first so that even the assertion fails,
+        // the test data will be reverted to the original values
+        const jsonPayload = JSON.parse(fs.readFileSync(LocalTestDataFilePath + '/quote_rollback_edit.json', 'utf8'));
+        await apiHelper.put('/api/quote/196', jsonPayload);
+
+        expect(quote.QuoteDate).toBe('2020-03-25');
+        expect(quote.QuoteName).toBe('TEST SGI QUOTE 002');
+        expect(quote.ExchgRate).toBe(7);
+        expect(quote.Memo).toBe('UPDATE TEST');
+        expect(quote.Quotes[0].Weight).toBe('0.3');
+        expect(quote.Quotes[0].Qty).toBe(2000);
+        expect(quote.Quotes[0].FreightCost).toBe(10);
+        expect(quote.Quotes[0].Price).toBe(840);
+        expect(quote.Quotes[0].Leadtime).toBe('150');
+        expect(quote.Quotes[0].Memo).toBe('UI DETAIL UPDATE');
+        expect(quote.Quotes[0].Status).toBe('LOCKED');
+
+        await apiHelper.dispose();
+
+    });
 
 });

@@ -14,7 +14,7 @@ export class ViewPartyPage {
     }
 
     async getPartyInfo(): Promise<PartyInfo> {
-        const ret = new PartyInfo();
+        const ret: PartyInfo = {};
         ret.FullName = await this.page.locator('#viewFullName').textContent();
         ret.ShortAlpha = await this.page.locator('#viewShortAlpha').textContent();
         ret.ShortName = await this.page.locator('#viewShortName').textContent();

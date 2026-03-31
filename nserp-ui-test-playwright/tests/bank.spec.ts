@@ -61,7 +61,7 @@ test.describe('Import Bank', () => {
         expect(importedBankInfo.length).toBe(3);
         expect(importedBankInfo[0].TrnDate.trim()).toBe('3/11/2026');
         expect(importedBankInfo[0].TrnDesc.trim()).toBe('MOBILE DEPOSIT : REF NUMBER :808110XXXXXX');
-        expect(importedBankInfo[0].TrnAmount.trim()).toBe('$1012.00');
+        expect(importedBankInfo[0].TrnAmount.trim()).toBe('$1,012.00');
         expect(importedBankInfo[0].TrnType.trim()).toBe('客户收款');
     });
 

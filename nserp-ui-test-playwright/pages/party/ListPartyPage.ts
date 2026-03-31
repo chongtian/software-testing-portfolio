@@ -20,7 +20,7 @@ export class ListPartyPage {
         const row = this.page.getByRole('table').locator(`tbody tr:nth-child(${index + 1})`);
         await row.waitFor({ state: 'visible' });
         
-        const ret = new PartyInfo();
+        const ret:PartyInfo = {};
         ret.ShortAlpha = await row.getByTestId('ShortAlpha').textContent();
         ret.ShortName = await row.getByTestId('ShortName').textContent();
         ret.PartyType = await row.getByTestId('PartyType').textContent();

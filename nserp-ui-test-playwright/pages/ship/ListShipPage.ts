@@ -21,7 +21,7 @@ export class ListShipPage extends BaseListPage {
         await this.page.getByRole('table').waitFor({ state: 'visible' });
         const row = this.page.getByRole('table').locator(`tbody tr:nth-child(${index + 1})`);
         await row.waitFor({ state: 'visible' });
-        const ret = new ShipInfo();
+        const ret: ShipInfo = {};
 
         // if keyword is entered, it returns records with detail information
         const keywordEl = this.page.getByRole('searchbox', { name: DisplayMessages.common.Keyword });

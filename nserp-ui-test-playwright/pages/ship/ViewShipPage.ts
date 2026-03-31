@@ -23,7 +23,7 @@ export class ViewShipPage {
         const list: ShipInfo[] = [];
 
         // Header
-        const header = new ShipInfo();
+        const header: ShipInfo = {};
         header.ShipName = await this.page.locator('#viewShipName').textContent();
         header.ShipDate = await this.page.locator('#viewShipDate').textContent();
         header.DepartDate = await this.page.locator('#viewDepartDate').textContent();
@@ -38,7 +38,7 @@ export class ViewShipPage {
         const details = this.page.getByTestId('details');
         await details.waitFor({ state: 'visible' });
         for (const loc of await details.locator('tbody tr').all()) {
-            const detail = new ShipInfo();
+            const detail: ShipInfo = {};
             detail.PartyName = await loc.getByTestId('partyId').textContent();
             detail.PoNumber = await loc.getByTestId('poNumber').textContent();
             detail.PartNumber = await loc.getByTestId('partNumber').textContent();

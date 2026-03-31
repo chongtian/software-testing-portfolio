@@ -46,19 +46,20 @@ export class ImportBankPage {
 
         for (let i = 0; i < rowCount; i++) {
             const tr = trs.nth(i);
-            const bankInfo = new BankInfo();
-            bankInfo.TrnDate = await tr.getByTestId('trnDate').nth(0).innerText();
-            bankInfo.TrnDesc = await tr.getByTestId('trnDesc').nth(0).innerText();
-            bankInfo.TrnAmount = await tr.getByTestId('trnAmount').nth(0).innerText();
-            bankInfo.TrnType = await tr.getByTestId('trnType').nth(0).textContent();
-            bankInfo.Memo = await tr.getByTestId('trnMemo').nth(0).innerText();
+            const bankInfo: BankInfo = {
+                TrnDate: await tr.getByTestId('trnDate').nth(0).innerText(),
+                TrnDesc: await tr.getByTestId('trnDesc').nth(0).innerText(),
+                TrnAmount: await tr.getByTestId('trnAmount').nth(0).innerText(),
+                TrnType: await tr.getByTestId('trnType').nth(0).textContent(),
+                Memo: await tr.getByTestId('trnMemo').nth(0).innerText()
+            };
             bankInfoList.push(bankInfo);
         }
         return bankInfoList;
     }
 
-    async clickSaveButton(confirm = true) {
-        if (confirm) {
+    async clickSaveButton(confirmAction = true) {
+        if (confirmAction) {
             this.page.once('dialog', dialog => dialog.accept());
         }
         await this.page.getByRole('button', { name: DisplayMessages.common.Save }).click();

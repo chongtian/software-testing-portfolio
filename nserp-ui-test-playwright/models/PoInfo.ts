@@ -1,18 +1,18 @@
-export class PoInfo {
-    PartyName: string | null | undefined;
-    PoNumber: string | null | undefined;
-    PoDate: string | null | undefined;
-    PoAmount: string | null | undefined;
-    HeaderStatus: string | null | undefined;
-    HeaderMemo: string | null | undefined;
-    PartNumber: string | null | undefined;
-    ProductNameEn: string | null | undefined;
-    ProductNameCn: string | null | undefined;
-    Price: string | null | undefined;
-    Qty: string | null | undefined;
-    Amount: string | null | undefined;
-    ReqDate: string | null | undefined;
-    PoType: string | null | undefined;
-    DetailStatus: string | null | undefined;
-    DetailMemo: string | null | undefined;
+export interface PoInfo {
+    PartyName?: string | null;
+    PoNumber?: string | null;
+    PoDate?: string | null;
+    PoAmount?: string | null;
+    HeaderStatus?: string | null;
+    HeaderMemo?: string | null;
+    PartNumber?: string | null;
+    ProductNameEn?: string | null;
+    ProductNameCn?: string | null;
+    Price?: string | null;
+    Qty?: string | null;
+    Amount?: string | null;
+    ReqDate?: string | null;
+    PoType?: string | null;
+    DetailStatus?: string | null;
+    DetailMemo?: string | null;
 }

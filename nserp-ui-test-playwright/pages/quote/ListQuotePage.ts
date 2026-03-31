@@ -21,8 +21,8 @@ export class ListQuotePage extends BaseListPage {
     async getQuoteInfo(index: number): Promise<QuoteInfo> {
         const row = this.page.getByRole('table').locator(`tbody tr:nth-child(${index + 1})`);
         await row.waitFor({ state: 'visible' });
-        
-        const ret = new QuoteInfo();
+
+        const ret: QuoteInfo = {};
         ret.QuoteDate = await row.getByTestId('QuoteDate').textContent();
         ret.PartNumber = await row.getByTestId('PartNumber').textContent();
         ret.ProductNameEn = await row.getByTestId('ProductNameEn').textContent();

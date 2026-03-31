@@ -1,14 +1,14 @@
-export class ProductInfo {
-    PartyName: string | null | undefined;
-    GroupName: string | null | undefined;
-    HtsCode: string | null | undefined;
-    HeaderMemo: string | null | undefined;
-    PartNumber: string | null | undefined;
-    ProductNameEn: string | null | undefined;
-    ProductNameCn: string | null | undefined;
-    Version: string | null | undefined;
-    Weight: string | null | undefined;
-    ProductType: string | null | undefined;
-    Status: string | null | undefined;
-    DetailMemo: string | null | undefined;
+export interface ProductInfo {
+    PartyName?: string | null;
+    GroupName?: string | null;
+    HtsCode?: string | null;
+    HeaderMemo?: string | null;
+    PartNumber?: string | null;
+    ProductNameEn?: string | null;
+    ProductNameCn?: string | null;
+    Version?: string | null;
+    Weight?: string | null;
+    ProductType?: string | null;
+    Status?: string | null;
+    DetailMemo?: string | null;
 }

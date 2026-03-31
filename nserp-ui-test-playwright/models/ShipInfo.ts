@@ -1,21 +1,21 @@
-export class ShipInfo {
-    ShipName: string | null | undefined;
-    ShipDate: string | null | undefined;
-    DepartDate: string | null | undefined;
-    BrokerInvoice: string | null | undefined;
-    ShipVia: string | null | undefined;
-    ShipAmount: string | null | undefined;
-    HeaderMemo: string | null | undefined;
-    HeaderStatus: string | null | undefined;
+export interface ShipInfo {
+    ShipName?: string | null;
+    ShipDate?: string | null;
+    DepartDate?: string | null;
+    BrokerInvoice?: string | null;
+    ShipVia?: string | null;
+    ShipAmount?: string | null;
+    HeaderMemo?: string | null;
+    HeaderStatus?: string | null;
 
-    PartyName: string | null | undefined;
-    PoNumber: string | null | undefined;
-    Amount: string | null | undefined;
-    PartNumber: string | null | undefined;
-    ProductNameEn: string | null | undefined;
-    ProductNameCn: string | null | undefined;
-    Price: string | null | undefined;
-    Qty: string | null | undefined;
-    DetailMemo: string | null | undefined;
-    DetailStatus: string | null | undefined;
+    PartyName?: string | null;
+    PoNumber?: string | null;
+    Amount?: string | null;
+    PartNumber?: string | null;
+    ProductNameEn?: string | null;
+    ProductNameCn?: string | null;
+    Price?: string | null;
+    Qty?: string | null;
+    DetailMemo?: string | null;
+    DetailStatus?: string | null;
 }

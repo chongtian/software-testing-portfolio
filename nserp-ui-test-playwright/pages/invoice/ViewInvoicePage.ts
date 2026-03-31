@@ -23,7 +23,7 @@ export class ViewInvoicePage {
         const list: InvoiceInfo[] = [];
 
         // Header
-        const header = new InvoiceInfo();
+        const header: InvoiceInfo = {};
         header.PartyName = await this.page.locator('#viewPartyName').textContent();
         header.InvNumber = await this.page.locator('#viewInvNumber').textContent();
         header.InvDate = await this.page.locator('#viewInvDate').textContent();
@@ -37,7 +37,7 @@ export class ViewInvoicePage {
         const details = this.page.getByTestId('details');
         await details.waitFor({ state: 'visible' });
         for (const loc of await details.locator('tbody tr').all()) {
-            const detail = new InvoiceInfo();
+            const detail: InvoiceInfo = {};
             detail.ShipName = await loc.getByTestId('shipName').textContent();
             detail.ShipDate = await loc.getByTestId('shipDate').textContent();
             detail.PoNumber = await loc.getByTestId('poNumber').textContent();

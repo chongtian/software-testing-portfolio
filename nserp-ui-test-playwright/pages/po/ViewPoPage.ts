@@ -23,7 +23,7 @@ export class ViewPoPage {
         const list: PoInfo[] = [];
 
         // Header
-        const header = new PoInfo();
+        const header: PoInfo = {};
         header.PartyName = await this.page.locator('#viewPartyName').textContent();
         header.PoNumber = await this.page.locator('#viewPoNumber').textContent();
         header.PoDate = await this.page.locator('#viewPoDate').textContent();
@@ -36,7 +36,7 @@ export class ViewPoPage {
         const details = this.page.getByTestId('details');
         await details.waitFor({ state: 'visible' });
         for (const loc of await details.locator('tbody tr').all()) {
-            const detail = new PoInfo();
+            const detail: PoInfo = {};
             detail.PartNumber = await loc.getByTestId('partNumber').textContent();
             detail.ProductNameEn = await loc.getByTestId('productNameEn').textContent();
             detail.ProductNameCn = await loc.getByTestId('productNameCn').textContent();

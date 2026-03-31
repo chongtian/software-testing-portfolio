@@ -23,7 +23,7 @@ export class ViewQuotePage {
         const list: QuoteInfo[] = [];
 
         // Header
-        const header = new QuoteInfo();
+        const header: QuoteInfo = {};
         header.PartyName = await this.page.locator('#viewPartyName').textContent();
         header.QuoteDate = await this.page.locator('#viewQuoteDate').textContent();
         header.QuoteName = await this.page.locator('#viewQuoteName').textContent();
@@ -35,7 +35,7 @@ export class ViewQuotePage {
         const details = this.page.getByTestId('details');
         await details.waitFor({ state: 'visible' });
         for(const loc of await details.locator('tbody tr').all()) {
-            const detail = new QuoteInfo();
+            const detail: QuoteInfo = {};
             detail.PartNumber = await loc.getByTestId('partNumber').textContent();
             detail.ProductNameEn = await loc.getByTestId('productNameEn').textContent();
             detail.ProductNameCn = await loc.getByTestId('productNameCn').textContent();

@@ -85,25 +85,17 @@ export class ApiHelper {
     }
 
     async get(endpoint: string) {
-        let result: any;
+        // let result: any;
 
         if (this.context) {
-            await this.context.get(endpoint).then(response => {
-                if (!response.ok()) {
-                    throw new Error(`API GET request to ${endpoint} failed with status ${response.status()}`);
-                }
-                response.json().then(data => {
-                    result = data;
-                }).catch(error => {
-                    console.error(`Error parsing JSON response from ${endpoint}:`, error);
-                    throw error;
-                });
-            }).catch(error => {
-                console.error(`Error during API GET request to ${endpoint}:`, error);
-                throw error;
-            });
+            const res = await this.context.get(endpoint);
+            if (!res.ok()) {
+                return null;
+            }
+
+            return res.json();
         }
-        return result;
+        return null;
     }
 
 }

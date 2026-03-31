@@ -23,12 +23,13 @@ export class ListBankPage extends BaseListPage {
         await this.page.getByRole('table').waitFor({ state: 'visible' });
         const row = this.page.getByRole('table').locator(`tbody tr:nth-child(${index + 1})`);
         await row.waitFor({ state: 'visible' });
-        const ret = new BankInfo();
-        ret.TrnDate = await row.getByTestId('TrnDate').textContent();
-        ret.TrnType = await row.getByTestId('TrnType').textContent();
-        ret.TrnDesc = await row.getByTestId('TrnDesc').textContent();
-        ret.TrnAmount = await row.getByTestId('TrnAmount').textContent();
-        ret.Memo = await row.getByTestId('Memo').textContent();
+        const ret: BankInfo = {
+            TrnDate: await row.getByTestId('TrnDate').textContent(),
+            TrnType: await row.getByTestId('TrnType').textContent(),
+            TrnDesc: await row.getByTestId('TrnDesc').textContent(),
+            TrnAmount: await row.getByTestId('TrnAmount').textContent(),
+            Memo: await row.getByTestId('Memo').textContent()
+        };
         return ret;
     }
 
