@@ -24,10 +24,12 @@ namespace KpUiTestxUnit.Pages
             passwordField.FindElement(_driver).SendKeys(password);
             loginButton.FindElement(_driver).Click();
 
+            // due to the cold-start of AWS Lambda functions, the initial login needs a longer timeout time
+            var longWait = WebDriverUtility.GetWait(_driver, 60);            
             try
             {
-                _wait.Until(d => d.Url.Contains("/home"));
-                _wait.Until(d => d.FindElements(By.CssSelector("mat-progress-bar")).Count == 0);
+                longWait.Until(d => d.Url.Contains("/home"));
+                longWait.Until(d => d.FindElements(By.CssSelector("mat-progress-bar")).Count == 0);
                 return true;
             }
             catch (WebDriverTimeoutException)

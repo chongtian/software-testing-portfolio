@@ -6,5 +6,5 @@
     "ChildPassword": ""
   },
   "BaseUrl": "http://kidproblemdev.nowsuncorp.com",
-  "TimeoutInSeconds": 15
+  "TimeoutInSeconds": 20
 }
