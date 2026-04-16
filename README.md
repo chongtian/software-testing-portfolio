@@ -1,8 +1,8 @@
 ## UI Automation Suite | Kid Problems
-This repository showcases vairous test frameworks to validate the Kid Problems web application (refer to the repo here: [kid-problems](https://github.com/chongtian/kid-problems)). 
-**Updates:** I have migrated *kid-problems* from Azure DevOps to GitHub. Going forward, I will maintain ui tests in the repo [kid-problems](https://github.com/chongtian/kid-problems).
+This repository showcases vairous test frameworks. 
 
 ### Test Projects
+- **nserp-ui-test-playwright** UI Test project based on playwright
 - **kid-problem-ui-test-playwright** UI Test project based on playwright
 - **kid-problem-ui-test-selenium** UI Test projects based on Selenium Webdriver
   - **KpUiTestNUnit:** Test runner is NUnit.

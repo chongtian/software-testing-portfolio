@@ -11,3 +11,6 @@ This test suite showcases Selenium WebDriver frameworks built with C# and NUnit/
 - Decoupled Logic: Separation of test scripts from page-specific elements for high maintainability.
 - Fluent Wait Strategy: Implementation of WebDriverWait to eliminate flakiness caused by element load times.
 - CI/CD Ready: Test credential can be provided through Environment Variables, *KPUITEST_USERNAME* and *KPUITEST_PASSWORD*, which is important for CI/CD pipeline.
+
+### Notes
+I’ve moved the **KidProblem** source code and DevOps setup from Azure DevOps to GitHub. Going forward, I’ll maintain the automated tests in the KidProblem GitHub repository. Please see the repo here: [kid-problems](https://github.com/chongtian/kid-problems).

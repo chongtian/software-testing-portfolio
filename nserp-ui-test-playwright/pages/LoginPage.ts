@@ -1,0 +1,34 @@
+import { expect, type Locator, type Page } from '@playwright/test';
+import { LOGIN_URL } from '@ui-test/utils'
+
+export class LoginPage {
+
+    readonly page: Page;
+    readonly usernameField: Locator;
+    readonly passwordField: Locator;
+    readonly signInButton: Locator;
+
+    constructor(page: Page) {
+        this.page = page;
+        this.usernameField = page.locator('#email');
+        this.passwordField = page.locator('#password');
+        this.signInButton = page.getByTestId('btnSignIn');
+    }
+
+    async goto() {
+        await this.page.goto(LOGIN_URL);
+    }
+
+    async login(username: string, password: string, pathToStorage: string = null) {
+        await this.usernameField.fill(username);
+        await this.passwordField.fill(password);
+        await this.signInButton.click();
+        await expect(this.page).toHaveURL(/home/);
+        await expect(this.page.locator('ns-search')).toBeVisible();
+
+        if (pathToStorage) {
+            await this.page.context().storageState({ path: pathToStorage });
+        }
+
+    }
+}

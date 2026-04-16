@@ -1,0 +1,19 @@
+export interface PaymentInfo {
+    PartyName?: string | null;
+    PayDocNum?: string | null;
+    PayDocDate?: string | null;
+    DepositDate?: string | null;
+    CommissionDate?: string | null;
+    PayAmount?: string | null;
+    PayType?: string | null;
+    HeaderMemo?: string | null;
+    HeaderStatus?: string | null;
+    InvNumber?: string | null;
+    PoNumber?: string | null;
+    PartNumber?: string | null;
+    ProductNameEn?: string | null;
+    PayItem?: string | null;
+    Amount?: string | null;
+    DetailMemo?: string | null;
+    DetailStatus?: string | null;
+}
