@@ -4,14 +4,10 @@ on:
     branches: [ main ]
     paths:
       - kid-problem-ui-test-playwright/**
-    paths-ignore:
-      - '**/*.md'
   pull_request:
     branches: [ main ]
     paths:
       - kid-problem-ui-test-playwright/**    
-    paths-ignore:
-      - '**/*.md'
   workflow_dispatch:  # Allows manual triggering from the Actions tab
 
 jobs:
