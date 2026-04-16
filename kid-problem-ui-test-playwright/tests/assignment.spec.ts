@@ -1,5 +1,5 @@
 import test, { expect } from "@playwright/test";
-import { adminAuthDataFilePath, childAuthDataFilePath } from "../utils/constants";
+import { AdminAuthDataFilePath, ChildAuthDataFilePath } from "../utils/constants";
 import { AssignmentQueryPage } from "../pages/AssignmentQueryPage";
 import { AssignmentViewPage } from "../pages/AssignmentViewPage";
 import { MessagePage } from "../pages/MessagePage";
@@ -16,7 +16,7 @@ const testData = {
 };
 
 test.describe('Assignment Query Test', () => {
-    test.use({ storageState: adminAuthDataFilePath });
+    test.use({ storageState: AdminAuthDataFilePath });
 
     testData.queryTest.forEach((tdata, i) => {
         test(`User queries in Assignment Query - ${i + 1}`, async ({ page }) => {

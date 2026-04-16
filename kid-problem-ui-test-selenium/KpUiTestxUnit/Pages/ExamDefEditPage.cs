@@ -89,7 +89,7 @@ public sealed class ExamDefEditPage : PageBase
         _driver.FindElement(By.CssSelector(selectOptions)).Click();
     }
 
-    public string GetSelectExamcCategory()
+    public string GetSelectExamCategory()
     {
         return _driver.FindElement(examCategoryField).Text;
     }

@@ -1,8 +1,10 @@
 {
   "Credentials": {
-    "Username": "",
-    "Password": ""
+    "AdminUsername": "",
+    "AdminPassword": "",
+    "ChildUsername": "",
+    "ChildPassword": ""
   },
   "BaseUrl": "http://kidproblemdev.nowsuncorp.com",
-  "TimeoutInSeconds": 15
+  "TimeoutInSeconds": 20
 }

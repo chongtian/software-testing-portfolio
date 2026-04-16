@@ -11,7 +11,7 @@ namespace KpUiTestxUnit.Tests
             yield return new object?[] { TestDataExamRun.Test1 };
         }
 
-        public ExamRunTest(SetupFixture fixture) : base(fixture)
+        public ExamRunTest(SetupFixture fixture) : base(fixture, true)
         {
 
         }

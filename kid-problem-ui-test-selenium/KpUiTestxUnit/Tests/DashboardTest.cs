@@ -5,7 +5,7 @@ namespace KpUiTestxUnit.Tests
     public class DashboardTest : TestBase
     {
 
-        public DashboardTest(SetupFixture fixture) : base(fixture)
+        public DashboardTest(SetupFixture fixture) : base(fixture, true)
         {
 
         }

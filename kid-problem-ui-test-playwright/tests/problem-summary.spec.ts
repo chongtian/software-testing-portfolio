@@ -1,10 +1,10 @@
 import { test, expect } from '@playwright/test';
-import { adminAuthDataFilePath } from '../utils/constants'
+import { AdminAuthDataFilePath } from '../utils/constants'
 import { ProblemSummaryQueryPage } from '../pages/ProblemSummaryQueryPage';
 
 test.describe('Problem Summary', () => {
 
-    test.use({ storageState: adminAuthDataFilePath });
+    test.use({ storageState: AdminAuthDataFilePath });
 
     test('User queries Problem Summary with Load More', async ({ page }) => {
         const problemSummaryQueryPage = new ProblemSummaryQueryPage(page);
