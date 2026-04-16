@@ -12,7 +12,7 @@ export class EditProductPage {
         this.partySelect = new PartySelectComponent(page);
     }
 
-    async goto(id: number) {
+    async goto(id?: number | undefined) {
         if (id) {
             await this.page.goto(BASE_URL + '/product/edit/' + id);
         } else {

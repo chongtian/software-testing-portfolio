@@ -7,7 +7,7 @@ on:
   pull_request:
     branches: [ main ]
     paths:
-      - kid-problem-ui-test-selenium/KpUiTestxUnit/**    
+      - kid-problem-ui-test-selenium/KpUiTestxUnit/**        
   workflow_dispatch:  # Allows manual triggering from the Actions tab
 
 jobs:

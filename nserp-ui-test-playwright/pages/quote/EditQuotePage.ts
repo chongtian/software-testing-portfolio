@@ -14,7 +14,7 @@ export class EditQuotePage {
         this.queryPage = new QueryProductPage(page);
     }
 
-    async goto(id: number) {
+    async goto(id?: number | undefined) {
         if (id) {
             await this.page.goto(BASE_URL + '/quote/edit/' + id);
         } else {
@@ -63,17 +63,20 @@ export class EditQuotePage {
 
     async getDetailPartNumber(index: number): Promise<string> {
         const tr = await this.waitForTr(index);
-        return await tr.getByTestId('partNumber').textContent();
+        const value = await tr.getByTestId('partNumber').textContent();
+        return value ?? '';
     }
 
     async getDetailProductNameEn(index: number): Promise<string> {
         const tr = await this.waitForTr(index);
-        return await tr.getByTestId('productNameEn').textContent();
+        const value = await tr.getByTestId('productNameEn').textContent();
+        return value ?? '';
     }
 
     async getDetailProductNameCn(index: number): Promise<string> {
         const tr = await this.waitForTr(index);
-        return await tr.getByTestId('productNameCn').textContent();
+        const value = await tr.getByTestId('productNameCn').textContent();
+        return value ?? '';
     }
 
     async enterDetailWeight(index: number, value: string) {

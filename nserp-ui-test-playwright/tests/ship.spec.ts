@@ -15,7 +15,7 @@ test.describe('View Ship', () => {
         await listPage.enterShipYear('2022');
         await listPage.clickSearchButton();
         const ship = await listPage.getShipInfo(3);
-        expect(ship.ShipName.trim()).toBe('22H14 海运发货清单-Lindsay');
+        expect(ship.ShipName!.trim()).toBe('22H14 海运发货清单-Lindsay');
     });
 
     test('User queries ship by party and keyword', async ({ page }) => {
@@ -25,14 +25,14 @@ test.describe('View Ship', () => {
         await listPage.enterKeyword('4.5');
         await listPage.clickSearchButton();
         const ship = await listPage.getShipInfo(1);
-        expect(ship.ProductNameEn.trim()).toBe('HOLDER 4.5 Machine LH');
+        expect(ship.ProductNameEn!.trim()).toBe('HOLDER 4.5 Machine LH');
     });
 
     test('User can query ship by entering url query', async ({ page }) => {
         const listPage = new ListShipPage(page);
         await listPage.goto('?party=9&keyword=LTK&year=');
         const ship = await listPage.getShipInfo(0);
-        expect(ship.Amount.trim()).toBe('$4,500.00');
+        expect(ship.Amount!.trim()).toBe('$4,500.00');
     });
 
     test('User navigats to a ship from Browse Ship', async ({ page }) => {
@@ -43,7 +43,7 @@ test.describe('View Ship', () => {
         await expect(page).toHaveURL(/ship\/view\/588/);
         const ship = await viewPage.getShipInfo();
         expect(ship.length).toBeGreaterThan(1);
-        expect(ship[0].BrokerInvoice.trim()).toBe('22H17');
+        expect(ship[0].BrokerInvoice!.trim()).toBe('22H17');
     });
 
 });
@@ -53,7 +53,7 @@ test.describe('Create and Update Ship', () => {
     test('User creates a ship', async ({ page }) => {
 
         const editPage = new EditShipPage(page);
-        await editPage.goto(null);
+        await editPage.goto();
 
         await editPage.enterShipName('TEST SHIP 001');
         await editPage.enterShipDate('10/15/2020');
@@ -147,19 +147,19 @@ test.describe('Create and Update Ship', () => {
 
         const shipInfoList = await importPage.getImportedShipInfo();
         expect(shipInfoList.length).toBe(2);
-        expect(shipInfoList[0].ShipName.trim()).toBe('ship_import_template');
-        expect(shipInfoList[0].ShipVia.trim()).toBe('海运');
-        expect(shipInfoList[0].BrokerInvoice.trim()).toBe('24A12');
-        expect(shipInfoList[0].ShipAmount.trim()).toBe('10500');
+        expect(shipInfoList[0].ShipName!.trim()).toBe('ship_import_template');
+        expect(shipInfoList[0].ShipVia!.trim()).toBe('海运');
+        expect(shipInfoList[0].BrokerInvoice!.trim()).toBe('24A12');
+        expect(shipInfoList[0].ShipAmount!.trim()).toBe('10500');
 
 
-        expect(shipInfoList[1].PartyName.trim()).toBe('Sunkist');
-        expect(shipInfoList[1].PoNumber.trim()).toBe('PL FOR SHP 001');
-        expect(shipInfoList[1].ProductNameEn.trim()).toBe('STRAINER');
-        expect(shipInfoList[1].ProductNameCn.trim()).toBe('网罩');
-        expect(shipInfoList[1].Price.trim()).toBe('35');
-        expect(shipInfoList[1].Qty.trim()).toBe('300');
-        expect(shipInfoList[1].Amount.trim()).toBe('$10,500.00');
+        expect(shipInfoList[1].PartyName!.trim()).toBe('Sunkist');
+        expect(shipInfoList[1].PoNumber!.trim()).toBe('PL FOR SHP 001');
+        expect(shipInfoList[1].ProductNameEn!.trim()).toBe('STRAINER');
+        expect(shipInfoList[1].ProductNameCn!.trim()).toBe('网罩');
+        expect(shipInfoList[1].Price!.trim()).toBe('35');
+        expect(shipInfoList[1].Qty!.trim()).toBe('300');
+        expect(shipInfoList[1].Amount!.trim()).toBe('$10,500.00');
 
         // this test does not save and not commit to database, so no need to do rollback
 

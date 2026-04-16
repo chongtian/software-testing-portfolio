@@ -16,7 +16,7 @@ export class ApiHelper {
         const storageState = JSON.parse(fs.readFileSync(storageStatePath, 'utf-8'));
         const localStorage = storageState.origins[0].localStorage as { name: string; value: string }[];
 
-        let accessToken: string | undefined = undefined;
+        let accessToken: string = '';
         localStorage.forEach(item => {
             if (item.name.endsWith('.accessToken')) {
                 accessToken = item.value;
@@ -73,14 +73,15 @@ export class ApiHelper {
 
     async post(endpoint: string, payload: any) {
         if (this.context) {
-            await this.context.post(endpoint, { data: payload }).then(response => {
-                if (!response.ok()) {
-                    throw new Error(`API POST request to ${endpoint} failed with status ${response.status()}`);
-                }
-            }).catch(error => {
-                console.error(`Error during API POST request to ${endpoint}:`, error);
-                throw error;
-            });
+
+            const res = await this.context.post(endpoint, { data: payload });
+            if (!res.ok()) {
+                console.log(`API POST request to ${endpoint} failed with status ${res.status()}`);
+                return null;
+            }
+
+            return res.json();           
+            
         }
     }
 
