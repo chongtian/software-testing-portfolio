@@ -1,0 +1,23 @@
+{
+    "TrnId": 927,
+    "TrnAccount": "TX",
+    "TrnYear": 2022,
+    "TrnDate": "2022-11-09",
+    "TrnType": "38",
+    "TrnDesc": "WF Bus Credit AUTO PAY 221109 90225602962337 TAN",
+    "TrnAmount": -109.74,
+    "Status": "Y",
+    "Memo": null,
+    "CreateByFullname": "高重天",
+    "CreateBy": "chongtiangao",
+    "UpdateByFullname": "高重天",
+    "UpdateBy": "chongtiangao",
+    "CreateDate": "2023-10-28T20:02:52+00:00",
+    "UpdateDate": "2023-10-28T20:02:52+00:00",
+    "IsSuccessful": true,
+    "Message": null,
+    "ReturnCode": 0,
+    "ChangeAction": 2,
+    "PaginationToken": null,
+    "OldKeyword": null
+}

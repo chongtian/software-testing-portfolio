@@ -15,7 +15,7 @@ export class EditPaymentPage {
         this.queryPage = new QueryPaymentPage(page);
     }
 
-    async goto(id: number) {
+    async goto(id?: number | undefined) {
         if (id) {
             await this.page.goto(BASE_URL + '/pay/edit/' + id);
         } else {
@@ -68,7 +68,7 @@ export class EditPaymentPage {
         const option = selector.getByRole('option', { name: value, exact: true });
         await option.waitFor({ state: 'visible' });
         await option.click();
-    }    
+    }
 
     async selectHeaderStatus(value: string) {
         const headerStatusSelector = this.page.locator('.header').getByRole('combobox', { name: DisplayMessages.common.DisplayNames.Status });
@@ -100,22 +100,26 @@ export class EditPaymentPage {
 
     async getDetailInvoiceNumber(index: number): Promise<string> {
         const tr = await this.waitForTr(index);
-        return await tr.getByTestId('invNumber').textContent();
+        const value = await tr.getByTestId('invNumber').textContent();
+        return value ?? '';
     }
 
     async getDetailPoNumber(index: number): Promise<string> {
         const tr = await this.waitForTr(index);
-        return await tr.getByTestId('poNumber').textContent();
+        const value = await tr.getByTestId('poNumber').textContent();
+        return value ?? '';
     }
 
     async getDetailPartNumber(index: number): Promise<string> {
         const tr = await this.waitForTr(index);
-        return await tr.getByTestId('partNumber').textContent();
+        const value = await tr.getByTestId('partNumber').textContent();
+        return value ?? '';
     }
 
     async getDetailProductNameEn(index: number): Promise<string> {
         const tr = await this.waitForTr(index);
-        return await tr.getByTestId('productNameEn').textContent();
+        const value = await tr.getByTestId('productNameEn').textContent();
+        return value ?? '';
     }
 
     async enterDetailPayItem(index: number, value: string) {
@@ -126,7 +130,7 @@ export class EditPaymentPage {
     async getDetailPayItem(index: number): Promise<string> {
         const tr = await this.waitForTr(index);
         return await tr.getByTestId('payItem').getByRole('textbox').inputValue();
-    }    
+    }
 
     async enterDetailAmount(index: number, value: string) {
         const tr = await this.waitForTr(index);
@@ -136,7 +140,7 @@ export class EditPaymentPage {
     async getDetailAmount(index: number): Promise<string> {
         const tr = await this.waitForTr(index);
         return await tr.getByTestId('amount').getByRole('spinbutton').inputValue();
-    }    
+    }
 
     async enterDetailMemo(index: number, value: string) {
         const tr = await this.waitForTr(index);

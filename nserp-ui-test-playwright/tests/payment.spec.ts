@@ -14,7 +14,7 @@ test.describe('View Payment', () => {
         await listPage.partySelect.selectParty('HFM - HYDRO FITTING MFG CORP.');
         await listPage.clickSearchButton();
         const payment = await listPage.getPaymentInfo(3);
-        expect(payment.PayDocNum.trim()).toBe('089335');
+        expect(payment.PayDocNum!.trim()).toBe('089335');
     });
 
     test('User queries ship by party and keyword', async ({ page }) => {
@@ -24,14 +24,14 @@ test.describe('View Payment', () => {
         await listPage.enterKeyword('1070');
         await listPage.clickSearchButton();
         const payment = await listPage.getPaymentInfo(1);
-        expect(payment.PoNumber.trim()).toBe('54834');
+        expect(payment.PoNumber!.trim()).toBe('54834');
     });
 
     test('User can query Payment by entering url query', async ({ page }) => {
         const listPage = new ListPaymentPage(page);
         await listPage.goto('?party=8&keyword=1070');
         const payment = await listPage.getPaymentInfo(0);
-        expect(payment.Amount.trim()).toBe('$11,128.00');
+        expect(payment.Amount!.trim()).toBe('$11,128.00');
     });
 
     test('User navigats to a Payment from Browse Payment', async ({ page }) => {
@@ -45,7 +45,7 @@ test.describe('View Payment', () => {
         await expect(page).toHaveURL(/pay\/view\/576/);
         const payment = await viewPage.getPaymentInfo();
         expect(payment.length).toBeGreaterThan(1);
-        expect(payment[0].PayDocNum.trim()).toBe('090550');
+        expect(payment[0].PayDocNum!.trim()).toBe('090550');
     });
 
 });
@@ -58,7 +58,7 @@ test.describe('Create and Update Payment', () => {
         await apiHelper.put('/api/inv/887', jsonPayload);
 
         const editPage = new EditPaymentPage(page);
-        await editPage.goto(null);
+        await editPage.goto();
 
         await editPage.selectParty('Lindsay Forest Products PTLD');
         await editPage.enterPayDocNum('56789');

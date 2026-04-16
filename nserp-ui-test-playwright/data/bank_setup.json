@@ -1,0 +1,23 @@
+{
+    "TrnId": 0,
+    "TrnAccount": "TX",
+    "TrnYear": 2012,
+    "TrnDate": "2012-12-12",
+    "TrnType": "38",
+    "TrnDesc": "Placeholder Bank Transactions",
+    "TrnAmount": -100.00,
+    "Status": "Y",
+    "Memo": null,
+    "CreateByFullname": "高重天",
+    "CreateBy": "chongtiangao",
+    "UpdateByFullname": "高重天",
+    "UpdateBy": "chongtiangao",
+    "CreateDate": "2023-10-28T20:02:52+00:00",
+    "UpdateDate": "2023-10-28T20:02:52+00:00",
+    "IsSuccessful": true,
+    "Message": null,
+    "ReturnCode": 0,
+    "ChangeAction": 1,
+    "PaginationToken": null,
+    "OldKeyword": null
+}

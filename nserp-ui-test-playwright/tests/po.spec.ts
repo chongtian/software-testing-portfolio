@@ -15,7 +15,7 @@ test.describe('View Po', () => {
         await listPage.enterPoYear('2022');
         await listPage.clickSearchButton();
         const po = await listPage.getPoInfo(3);
-        expect(po.PoNumber.trim()).toBe('54834');
+        expect(po.PoNumber!.trim()).toBe('54834');
     });
 
     test('User queries po by party only with load more data', async ({ page }) => {
@@ -27,7 +27,7 @@ test.describe('View Po', () => {
         await listPage.loadMoreData();
         await listPage.paginator.ClickLastPageButton();
         const po = await listPage.getPoInfo(0);
-        expect(po.PoNumber.trim()).toBe('42983');
+        expect(po.PoNumber!.trim()).toBe('42983');
     });
 
     test('User queries po by party and keyword', async ({ page }) => {
@@ -37,7 +37,7 @@ test.describe('View Po', () => {
         await listPage.enterKeyword('37');
         await listPage.clickSearchButton();
         const po = await listPage.getPoInfo(1);
-        expect(po.ProductNameEn.trim()).toBe('Casting - Base Plate');
+        expect(po.ProductNameEn!.trim()).toBe('Casting - Base Plate');
     });
 
     test('User can query po by entering url query', async ({ page }) => {
@@ -45,7 +45,7 @@ test.describe('View Po', () => {
         const listPage = new ListPoPage(page);
         await listPage.goto('?party=8&keyword=&year=');
         const po = await listPage.getPoInfo(0);
-        expect(po.PoAmount.trim()).toBe('$10,700.00');
+        expect(po.PoAmount!.trim()).toBe('$10,700.00');
     });
 
     test('User navigats to a po from Browse Po', async ({ page }) => {
@@ -58,7 +58,7 @@ test.describe('View Po', () => {
         await expect(page).toHaveURL(/po\/view\/796/);
         const po = await viewPage.getPoInfo();
         expect(po.length).toBeGreaterThan(1);
-        expect(po[0].PoNumber.trim()).toBe('123679');
+        expect(po[0].PoNumber!.trim()).toBe('123679');
     });
 
 });
@@ -67,7 +67,7 @@ test.describe('Create and Update Po', () => {
 
     test('User creates a po', async ({ page }) => {
         const editPage = new EditPoPage(page);
-        await editPage.goto(null);
+        await editPage.goto();
 
         await editPage.selectParty('Sunkist Growers Inc.');
         await editPage.enterPoNumber('TEST SGI PO 001');

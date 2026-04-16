@@ -231,7 +231,6 @@ test.describe('Menu Bar', () => {
 
 test.describe('Dashboard', () => {
 
-
     test('Global Search is available', async ({ page }) => {
         await page.goto(HOME_URL);
         const pageTitle = DisplayMessages.common.GlobalSearch;

@@ -14,7 +14,7 @@ export class EditPoPage {
         this.queryPage = new QueryProductPage(page);
     }
 
-    async goto(id: number) {
+    async goto(id?: number | undefined) {
         if (id) {
             await this.page.goto(BASE_URL + '/po/edit/' + id);
         } else {
@@ -76,17 +76,20 @@ export class EditPoPage {
 
     async getDetailPartNumber(index: number): Promise<string> {
         const tr = await this.waitForTr(index);
-        return await tr.getByTestId('partNumber').textContent();
+        const value = await tr.getByTestId('partNumber').textContent();
+        return value ?? '';
     }
 
     async getDetailProductNameEn(index: number): Promise<string> {
         const tr = await this.waitForTr(index);
-        return await tr.getByTestId('productNameEn').textContent();
+        const value = await tr.getByTestId('productNameEn').textContent();
+        return value ?? '';
     }
 
     async getDetailProductNameCn(index: number): Promise<string> {
         const tr = await this.waitForTr(index);
-        return await tr.getByTestId('productNameCn').textContent();
+        const value = await tr.getByTestId('productNameCn').textContent();
+        return value ?? '';
     }
 
     async enterDetailPrice(index: number, value: string) {
@@ -101,7 +104,8 @@ export class EditPoPage {
 
     async getDetailAmount(index: number): Promise<string> {
         const tr = await this.waitForTr(index);
-        return await tr.getByTestId('amount').textContent();
+        const value = await tr.getByTestId('amount').textContent();
+        return value ?? '';
     }
 
     async enterDetailReqDate(index: number, value: string) {
@@ -111,7 +115,8 @@ export class EditPoPage {
 
     async getDetailPoType(index: number): Promise<string> {
         const tr = await this.waitForTr(index);
-        return await tr.getByTestId('poType').textContent();
+        const value = await tr.getByTestId('poType').textContent();
+        return value ?? '';
     }
 
     async selectDetailStatus(index: number, value: string) {

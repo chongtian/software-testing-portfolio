@@ -14,7 +14,7 @@ test.describe('View Invoice', () => {
         await listPage.partySelect.selectParty('HFM - HYDRO FITTING MFG CORP.');
         await listPage.clickSearchButton();
         const invoice = await listPage.getInvoiceInfo(3);
-        expect(invoice.InvNumber.trim()).toBe('NS200514-HFM');
+        expect((invoice.InvNumber ?? '').trim()).toBe('NS200514-HFM');
     });
 
     test('User queries ship by party and keyword', async ({ page }) => {
@@ -24,14 +24,14 @@ test.describe('View Invoice', () => {
         await listPage.enterKeyword('1070');
         await listPage.clickSearchButton();
         const invoice = await listPage.getInvoiceInfo(1);
-        expect(invoice.PoNumber.trim()).toBe('45117');
+        expect((invoice.PoNumber ?? '').trim()).toBe('45117');
     });
 
     test('User can query invoice by entering url query', async ({ page }) => {
         const listPage = new ListInvoicePage(page);
         await listPage.goto('?party=8&keyword=1070');
         const invoice = await listPage.getInvoiceInfo(0);
-        expect(invoice.Qty.trim()).toBe('9,875');
+        expect((invoice.Qty ?? '').trim()).toBe('9,875');
     });
 
     test('User navigats to a invoice from Browse Invoice', async ({ page }) => {
@@ -45,7 +45,7 @@ test.describe('View Invoice', () => {
         await expect(page).toHaveURL(/inv\/view\/461/);
         const invoice = await viewPage.getInvoiceInfo();
         expect(invoice.length).toBeGreaterThan(1);
-        expect(invoice[0].InvNumber.trim()).toBe('NS150603-HFM');
+        expect((invoice[0].InvNumber ?? '').trim()).toBe('NS150603-HFM');
     });
 
 });
@@ -58,7 +58,7 @@ test.describe('Create and Update Invoice', () => {
         await apiHelper.put('/api/ship/613', jsonPayload);
 
         const editPage = new EditInvoicePage(page);
-        await editPage.goto(null);
+        await editPage.goto();
 
         await editPage.selectParty('Sunkist Growers Inc.');
         await editPage.enterInvoiceNumber('NS201203-SGI');

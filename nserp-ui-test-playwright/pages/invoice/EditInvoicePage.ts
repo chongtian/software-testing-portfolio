@@ -15,7 +15,7 @@ export class EditInvoicePage {
         this.queryPage = new QueryInvoicePage(page);
     }
 
-    async goto(id: number) {
+    async goto(id?: number | undefined) {
         if (id) {
             await this.page.goto(BASE_URL + '/inv/edit/' + id);
         } else {
@@ -93,27 +93,32 @@ export class EditInvoicePage {
 
     async getDetailShipName(index: number): Promise<string> {
         const tr = await this.waitForTr(index);
-        return await tr.getByTestId('shipName').textContent();
+        const value = await tr.getByTestId('shipName').textContent();
+        return value ?? '';
     }
 
     async getDetailShipDate(index: number): Promise<string> {
         const tr = await this.waitForTr(index);
-        return await tr.getByTestId('shipDate').textContent();
+        const value = await tr.getByTestId('shipDate').textContent();
+        return value ?? '';
     }
 
     async getDetailPoNumber(index: number): Promise<string> {
         const tr = await this.waitForTr(index);
-        return await tr.getByTestId('poNumber').textContent();
+        const value = await tr.getByTestId('poNumber').textContent();
+        return value ?? '';
     }
 
     async getDetailPartNumber(index: number): Promise<string> {
         const tr = await this.waitForTr(index);
-        return await tr.getByTestId('partNumber').textContent();
+        const value = await tr.getByTestId('partNumber').textContent();
+        return value ?? '';
     }
 
     async getDetailProductNameEn(index: number): Promise<string> {
         const tr = await this.waitForTr(index);
-        return await tr.getByTestId('productNameEn').textContent();
+        const value = await tr.getByTestId('productNameEn').textContent();
+        return value ?? '';
     }
 
     async enterDetailContent(index: number, value: string) {
@@ -133,7 +138,8 @@ export class EditInvoicePage {
 
     async getDetailAmount(index: number): Promise<string> {
         const tr = await this.waitForTr(index);
-        return await tr.getByTestId('amount').textContent();
+        const value = await tr.getByTestId('amount').textContent();
+        return value ?? '';
     }
 
     async selectDetailStatus(index: number, value: string) {

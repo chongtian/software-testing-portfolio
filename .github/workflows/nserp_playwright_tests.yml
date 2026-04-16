@@ -1,28 +1,22 @@
-name: Playwright Tests - KidProblem
+name: Playwright Tests - NSERP
 on:
-  push:
-    branches: [ main ]
-    paths:
-      - kid-problem-ui-test-playwright/**
-    paths-ignore:
-      - '**/*.md'
   pull_request:
     branches: [ main ]
     paths:
-      - kid-problem-ui-test-playwright/**    
+      - nserp-ui-test-playwright/**    
     paths-ignore:
       - '**/*.md'
   workflow_dispatch:  # Allows manual triggering from the Actions tab
 
 jobs:
   test-playwright:
-    environment: TEST_KIDPROBLEM
+    environment: TEST_NSERP
 
     timeout-minutes: 60
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./kid-problem-ui-test-playwright
+        working-directory: ./nserp-ui-test-playwright
 
     steps:
     - uses: actions/checkout@v5
@@ -40,23 +34,22 @@ jobs:
     - name: Run Playwright tests
       run: npx playwright test
       env:
-        BASE_URL: ${{ vars.BASE_URL }}
+        BASE_URL: ${{ secrets.BASE_URL }}
+        TEST_API_URL: ${{ secrets.TEST_API_URL }}
         TEST_USER_USERNAME: ${{ secrets.TEST_USER_USERNAME }}
         TEST_USER_PASSWORD: ${{ secrets.TEST_USER_PASSWORD }}
-        TEST_CHILD_USERNAME: ${{ secrets.TEST_CHILD_USERNAME }}
-        TEST_CHILD_PASSWORD: ${{ secrets.TEST_CHILD_PASSWORD }}
 
     - name: Upload Test Results
       uses: actions/upload-artifact@v4
       if: failure()
       with:
         name: test-results
-        path: kid-problem-ui-test-playwright/test-results/
+        path: nserp-ui-test-playwright/test-results/
         retention-days: 30
 
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
       with:
         name: playwright-report
-        path: kid-problem-ui-test-playwright/playwright-report/
+        path: nserp-ui-test-playwright/playwright-report/
         retention-days: 30

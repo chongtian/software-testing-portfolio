@@ -15,7 +15,7 @@ test.describe('View Product', () => {
         await listPage.partySelect.selectParty('ZII - ZACKLIFT');
         await listPage.clickSearchButton();
         const product = await listPage.getProductInfo(4);
-        expect(product.PartNumber.trim()).toBe('Z04-20a');
+        expect(product.PartNumber!.trim()).toBe('Z04-20a');
     });
 
     test('User sees products on the last page in Browse Product', async ({ page }) => {
@@ -25,7 +25,7 @@ test.describe('View Product', () => {
         await listPage.clickSearchButton();
         await listPage.paginator.ClickLastPageButton();
         const product = await listPage.getProductInfo(0);
-        expect(product.PartNumber.trim()).toBe('Z1304-9X4');
+        expect(product.PartNumber!.trim()).toBe('Z1304-9X4');
     });
 
     test('User can query products by keyword', async ({ page }) => {
@@ -35,14 +35,14 @@ test.describe('View Product', () => {
         await listPage.enterKeyword('J-Lock');
         await listPage.clickSearchButton();
         const product = await listPage.getProductInfo(0);
-        expect(product.PartNumber.trim()).toBe('Z30-22');
+        expect(product.PartNumber!.trim()).toBe('Z30-22');
     });
 
     test('User can query products by entering url query', async ({ page }) => {
         const listPage = new ListProductPage(page);
         await listPage.goto('?party=25&keyword=J-Lock');
         const product = await listPage.getProductInfo(0);
-        expect(product.PartNumber.trim()).toBe('Z30-22');
+        expect(product.PartNumber!.trim()).toBe('Z30-22');
     });
 
     test('User navigats to a product from Browse Product', async ({ page }) => {
@@ -55,7 +55,7 @@ test.describe('View Product', () => {
         await expect(page).toHaveURL(/product\/view\/342/);
         const product = await viewPage.getProductInfo();
         expect(product.length).toBe(2);
-        expect(product[1].PartNumber.trim()).toBe('830300');
+        expect(product[1].PartNumber!.trim()).toBe('830300');
     });
 
 });
@@ -64,7 +64,7 @@ test.describe('Create and Update Product', () => {
 
     test('User creates a Product', async ({ page }) => {
         const editPage = new EditProductPage(page);
-        await editPage.goto(null);
+        await editPage.goto();
 
         await editPage.selectParty('Sunkist Growers Inc.');
         await editPage.enterProductGroupName('SGI-TEST-001');
